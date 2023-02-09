@@ -30,12 +30,28 @@
             tools:text="sgsldfjgslfkjg"/>
 
         <TextView
-            android:id="@+id/laptop_age"
+            android:id="@+id/laptop_ram_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="49"
             app:layout_constraintTop_toBottomOf="@id/laptop_name"
             app:layout_constraintStart_toStartOf="@id/laptop_name"/>
+
+        <TextView
+            android:id="@+id/laptop_display_resolution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="49"
+            app:layout_constraintTop_toBottomOf="@id/laptop_ram_size"
+            app:layout_constraintStart_toStartOf="@id/laptop_ram_size"/>
+
+        <TextView
+            android:id="@+id/laptop_storage_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="49"
+            app:layout_constraintTop_toBottomOf="@id/laptop_display_resolution"
+            app:layout_constraintStart_toStartOf="@id/laptop_display_resolution"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

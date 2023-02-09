@@ -15,23 +15,48 @@ class MainActivity : AppCompatActivity() {
 
         recycleView.layoutManager = LinearLayoutManager(this)
 
-        val laptops = mutableListOf<Laptop>()
-
-        for(i in 0.. 30){
-            laptops.add(createLaptops())
-        }
+        val laptops = createLaptops()
 
         val adapter = LaptopAdapter(laptops)
 
         recycleView.adapter = adapter
     }
 
-    private fun createLaptops() = Laptop(
-        name = "",
-        age = Random.nextInt(10, 99),
-        image = R.drawable.baseline_10k_24,
-        universe = "Earth",
-        id = 0,
-        relation = listOf()
+    private fun createLaptops() : List<Laptop> = listOf(
+        Laptop(
+            name = "Dell XPS 13",
+            ramSizeGB = 1,
+            image = R.drawable.baseline_10k_24,
+            displayResolution = "Earth",
+            storageSizeTB = 0,
+            relation = listOf()
+        ),
+
+        Laptop(
+            name = "Mac book Air M2",
+            ramSizeGB = 1,
+            image = R.drawable.baseline_10k_24,
+            displayResolution = "Earth",
+            storageSizeTB = 0,
+            relation = listOf()
+        ),
+
+        Laptop(
+            name = "HP Spectre x360",
+            ramSizeGB = 1,
+            image = R.drawable.baseline_10k_24,
+            displayResolution = "Earth",
+            storageSizeTB = 0,
+            relation = listOf()
+        ),
+
+        Laptop(
+            name = "ASUS ROG Zephyrus G15",
+            ramSizeGB = 1,
+            image = R.drawable.baseline_10k_24,
+            displayResolution = "Earth",
+            storageSizeTB = 0,
+            relation = listOf()
+        )
     )
 }

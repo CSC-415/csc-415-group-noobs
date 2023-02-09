@@ -13,7 +13,9 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
     class LaptopViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val laptopImage: ImageView = itemView.findViewById(R.id.laptop_image)
         val laptopName: TextView = itemView.findViewById(R.id.laptop_name)
-        val laptopAge: TextView = itemView.findViewById(R.id.laptop_age)
+        val laptopRamSize: TextView = itemView.findViewById(R.id.laptop_ram_size)
+        val laptopDisplayResolution: TextView = itemView.findViewById(R.id.laptop_display_resolution)
+        val laptopStorageSize: TextView = itemView.findViewById(R.id.laptop_storage_size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaptopViewHolder {
@@ -28,6 +30,8 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
         val laptop = laptops[position]
         holder.laptopImage.setImageResource(laptop.image)
         holder.laptopName.text = laptop.name
-        holder.laptopAge.text = laptop.age.toString()
+        holder.laptopRamSize.text = laptop.ramSizeGB.toString()
+        holder.laptopDisplayResolution.text = laptop.displayResolution
+        holder.laptopStorageSize.text = laptop.storageSizeTB.toString()
     }
 }
