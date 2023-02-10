@@ -30,8 +30,8 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
         val laptop = laptops[position]
         holder.laptopImage.setImageResource(laptop.image)
         holder.laptopName.text = laptop.name
-        holder.laptopRamSize.text = laptop.ramSizeGB.toString()
-        holder.laptopDisplayResolution.text = laptop.displayResolution
-        holder.laptopStorageSize.text = laptop.storageSizeTB.toString()
+        holder.laptopRamSize.text = "Ram: " + laptop.ramSizeGB.toString() + " GB"
+        holder.laptopDisplayResolution.text = "Display Resolution: " + laptop.displayResolution
+        holder.laptopStorageSize.text = "SSD: " + laptop.storageSizeTB.toString() + " TB"
     }
 }
