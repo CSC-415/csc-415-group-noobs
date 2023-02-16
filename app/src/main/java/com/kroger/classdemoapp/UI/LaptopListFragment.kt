@@ -22,7 +22,7 @@ class LaptopListFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_laptop_list, container, false)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.laptop_recycle_view)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.laptop_recycler_view)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -39,7 +39,7 @@ class LaptopListFragment : Fragment() {
         Laptop(
             name = "Dell XPS 13",
             ramSizeGB = 16,
-            image = R.drawable.dell_xps_13,
+            image = "https://i0.wp.com/liliputing.com/wp-content/uploads/2019/12/xps13_02.jpg?fit=1200%2C950&ssl=1",
             displayResolution = "1920*1080",
             storageSizeTB = 2
         ),
@@ -47,7 +47,7 @@ class LaptopListFragment : Fragment() {
         Laptop(
             name = "Mac book Air M2",
             ramSizeGB = 8,
-            image = R.drawable.macbook_air,
+            image = "https://techcrunch.com/wp-content/uploads/2022/07/CMC_1580.jpg",
             displayResolution = "2560*1600",
             storageSizeTB = 1
         ),
@@ -55,7 +55,7 @@ class LaptopListFragment : Fragment() {
         Laptop(
             name = "HP Spectre x360",
             ramSizeGB = 16,
-            image = R.drawable.hp_spectre_x360,
+            image = "https://i.pcmag.com/imagery/reviews/00uwiwERhM15aoADGVjjUUy-1.jpg",
             displayResolution = "3840*2160",
             storageSizeTB = 1
         ),
@@ -63,7 +63,7 @@ class LaptopListFragment : Fragment() {
         Laptop(
             name = "ASUS ROG Zephyrus G15",
             ramSizeGB = 32,
-            image = R.drawable.asus_g15,
+            image = "https://cdn.shopify.com/s/files/1/0228/7629/1136/products/10_real_scar_15_l_9ba26284-960d-40fe-9e8c-3f881b2ba086_2000x.png?v=1657751794",
             displayResolution = "2560*1440",
             storageSizeTB = 8
         )

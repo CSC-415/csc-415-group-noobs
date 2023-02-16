@@ -24,7 +24,7 @@ class LaptopDetailFragment : Fragment() {
             val ramSizeGB = requireArguments().getInt("ramSizeGB")
             val displayResolution= requireArguments().getString("displayResolution")
             val storageSizeTB = requireArguments().getInt("storageSizeTB")
-            val image = requireArguments().getInt("image")
+            val image = requireArguments().getString("image")
         }
 
         return view
