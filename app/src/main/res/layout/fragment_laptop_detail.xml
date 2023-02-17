@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/laptop_detail_image"
-        android:layout_width="305dp"
-        android:layout_height="499dp"
+        android:layout_width="335dp"
+        android:layout_height="322dp"
         android:contentDescription="An image of laptop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,11 @@
         android:id="@+id/laptop_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         app:layout_constraintStart_toStartOf="@id/laptop_detail_image"
         app:layout_constraintTop_toBottomOf="@id/laptop_detail_image"
-        tools:text="Description"/>
+        app:layout_constraintEnd_toEndOf="@id/laptop_detail_image"
+        tools:text="It was hidden under the log beside the stream. It had been there for as long as Jerry had been alive. He wasn't sure if anyone besides him and his friends knew of its existence. He knew that anyone could potentially find it, but it was well enough hidden that it seemed unlikely to happen. The fact that it had been there for more than 30 years attested to this. So it was quite a surprise when he found the item was missing."/>
 
     <TextView
         android:id="@+id/laptop_name"

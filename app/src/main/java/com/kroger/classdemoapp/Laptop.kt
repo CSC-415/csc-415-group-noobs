@@ -6,5 +6,5 @@ data class Laptop(
     val displayResolution: String,
     val storageSizeTB: Int,
     val image: String,
-//    val relation: List<Int>
+    val description: Int
 )

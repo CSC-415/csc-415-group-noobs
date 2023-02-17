@@ -41,15 +41,19 @@ class LaptopListFragment : Fragment() {
             ramSizeGB = 16,
             image = "https://i0.wp.com/liliputing.com/wp-content/uploads/2019/12/xps13_02.jpg?fit=1200%2C950&ssl=1",
             displayResolution = "1920*1080",
-            storageSizeTB = 2
+            storageSizeTB = 2,
+            description = R.string.dell_description
+
         ),
+
 
         Laptop(
             name = "Mac book Air M2",
             ramSizeGB = 8,
             image = "https://techcrunch.com/wp-content/uploads/2022/07/CMC_1580.jpg",
             displayResolution = "2560*1600",
-            storageSizeTB = 1
+            storageSizeTB = 1,
+            description = R.string.mac_description
         ),
 
         Laptop(
@@ -57,7 +61,8 @@ class LaptopListFragment : Fragment() {
             ramSizeGB = 16,
             image = "https://i.pcmag.com/imagery/reviews/00uwiwERhM15aoADGVjjUUy-1.jpg",
             displayResolution = "3840*2160",
-            storageSizeTB = 1
+            storageSizeTB = 1,
+            description = R.string.hp_description
         ),
 
         Laptop(
@@ -65,7 +70,8 @@ class LaptopListFragment : Fragment() {
             ramSizeGB = 32,
             image = "https://cdn.shopify.com/s/files/1/0228/7629/1136/products/10_real_scar_15_l_9ba26284-960d-40fe-9e8c-3f881b2ba086_2000x.png?v=1657751794",
             displayResolution = "2560*1440",
-            storageSizeTB = 8
+            storageSizeTB = 8,
+            description = R.string.asus_description
         )
     )
 

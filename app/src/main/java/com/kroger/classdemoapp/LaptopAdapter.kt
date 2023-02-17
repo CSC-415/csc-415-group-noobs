@@ -29,7 +29,8 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
                 "ramSizeGB" to laptop.ramSizeGB,
                 "displayResolution" to laptop.displayResolution,
                 "storageSizeTB" to laptop.storageSizeTB,
-                "image" to laptop.image
+                "image" to laptop.image,
+                "description" to laptop.description
             )
 
             val detailFragment = LaptopDetailFragment()
@@ -54,20 +55,10 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
         Glide.with(holder.itemView.context).load(laptop.image).into(holder.laptopImage)
 
         holder.laptopName.text = laptop.name
-        holder.laptopRamSize.text = buildString {
-        append("Ram: ")
-        append(laptop.ramSizeGB.toString())
-        append(" GB")
-    }
-        holder.laptopDisplayResolution.text = buildString {
-        append("Display Resolution: ")
-        append(laptop.displayResolution)
-    }
-        holder.laptopStorageSize.text = buildString {
-        append("SSD: ")
-        append(laptop.storageSizeTB.toString())
-        append(" TB")
-    }
+        holder.laptopRamSize.text = laptop.ramSizeGB.toString()
+        holder.laptopDisplayResolution.text = laptop.displayResolution
+        holder.laptopStorageSize.text = laptop.storageSizeTB.toString()
+
     }
 
     inner class LaptopViewHolder(
@@ -79,6 +70,7 @@ class LaptopAdapter(private val laptops: List<Laptop>) : RecyclerView.Adapter<La
         val laptopRamSize: TextView = itemView.findViewById(R.id.laptop_ram_size)
         val laptopDisplayResolution: TextView = itemView.findViewById(R.id.laptop_display_resolution)
         val laptopStorageSize: TextView = itemView.findViewById(R.id.laptop_storage_size)
+
 
         init{
             itemView.setOnClickListener{
