@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="home"
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_home_24"
+        />
+    <item android:title="progress"
+        android:id="@+id/progress"
+        android:icon="@drawable/baseline_bar_chart_24"
+        />
+    <item android:title="achievements"
+        android:id="@+id/achievements"
+        android:icon="@drawable/baseline_wine_bar_24"
+        />
+    <item android:title="to_do"
+        android:id="@+id/to_do"
+        android:icon="@drawable/baseline_done_all_24"
+        />
+
+
+</menu>
