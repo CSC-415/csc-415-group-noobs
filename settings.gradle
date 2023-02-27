@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ClassDemoApp"
+rootProject.name = "BottomNav"
 include ':app'
