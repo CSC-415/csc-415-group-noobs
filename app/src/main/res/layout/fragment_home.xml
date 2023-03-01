@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +16,8 @@
         android:id="@+id/timer_settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/timer_setting_margin"
         android:src="@drawable/baseline_timer_settings_24"/>
 
@@ -24,7 +25,9 @@
         android:id="@+id/timer_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/timer_pause"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/fab_bigger_margin"
         app:srcCompat="@drawable/baseline_stop_24"/>
 
@@ -32,7 +35,9 @@
         android:id="@+id/timer_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/fab_bigger_margin"
         app:srcCompat="@drawable/baseline_pause_24"/>
 
@@ -40,8 +45,10 @@
         android:id="@+id/timer_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/timer_pause"
         android:layout_margin="@dimen/fab_bigger_margin"
         app:srcCompat="@drawable/baseline_play_24"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
