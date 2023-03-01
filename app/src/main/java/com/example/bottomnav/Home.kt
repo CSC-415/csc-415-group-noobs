@@ -22,22 +22,22 @@ import kotlin.concurrent.timer
 class Home : Fragment() {
     companion object{
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000
-        fun setAlarm(context: Context, activity: Activity, nowSeconds: Long, secondsRemaining: Long):Long{
+        fun setAlarm(activity: Activity, nowSeconds: Long, secondsRemaining: Long):Long{
             val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
             val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, TimerExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val intent = Intent(activity, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-            PrefUtil.setAlarmSetTime(nowSeconds, context)
+            PrefUtil.setAlarmSetTime(nowSeconds, activity)
             return wakeUpTime
         }
 
-        fun removeAlarm(context: Context){
-            val intent = Intent(context, TimerExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        fun removeAlarm(activity: Activity){
+            val intent = Intent(activity, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
+            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.cancel(pendingIntent)
-            PrefUtil.setAlarmSetTime(0, context)//0 -> alarm is not set
+            PrefUtil.setAlarmSetTime(0, activity)//0 -> alarm is not set
         }
     }
 
@@ -85,17 +85,15 @@ class Home : Fragment() {
         initTimer()
 
         //backgrounded timer
-        removeAlarm(requireContext())
+        removeAlarm(requireActivity())
     }
 
     override fun onPause() {
         super.onPause()
 
         if(timerState == TimerState.Running){
-            timer.cancel()
-
             //backgrounded timer
-            val wakeUpTime = setAlarm(requireContext(), requireActivity(), nowSeconds, secondsRemaining)
+            val wakeUpTime = setAlarm(requireActivity(), nowSeconds, secondsRemaining)
         }
         else if (timerState == TimerState.Paused){
 
