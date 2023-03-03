@@ -135,7 +135,7 @@ class Home : Fragment() {
         //resume timer where we left off
         if(secondsRemaining <= 0)
             endTimer()
-        else if(timerState == TimerState.Running)
+        if(timerState == TimerState.Running)
             beginTimer()
 
         updateButtons()
