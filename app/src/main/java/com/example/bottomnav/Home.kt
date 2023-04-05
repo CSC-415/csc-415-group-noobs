@@ -196,7 +196,6 @@ class Home : Fragment() {
     }
 
     private fun updateButtons(){
-        timerState = PrefUtil.getTimerState(requireContext())
         when (timerState){
             TimerState.Running ->{
                 binding.timerStart.isEnabled = false
