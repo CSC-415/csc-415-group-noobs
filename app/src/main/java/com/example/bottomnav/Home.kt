@@ -22,22 +22,22 @@ import kotlin.concurrent.timer
 class Home : Fragment() {
     companion object{
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000
-        fun setAlarm(activity: Activity, nowSeconds: Long, secondsRemaining: Long):Long{
+        fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long):Long{
             val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
-            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(activity, TimerExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-            PrefUtil.setAlarmSetTime(nowSeconds, activity)
+            PrefUtil.setAlarmSetTime(nowSeconds, context)
             return wakeUpTime
         }
 
-        fun removeAlarm(activity: Activity){
-            val intent = Intent(activity, TimerExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
-            val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        fun removeAlarm(context: Context){
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.cancel(pendingIntent)
-            PrefUtil.setAlarmSetTime(0, activity)//0 -> alarm is not set
+            PrefUtil.setAlarmSetTime(0, context)//0 -> alarm is not set
         }
     }
 
@@ -69,7 +69,7 @@ class Home : Fragment() {
 
         binding.timerPause.setOnClickListener{ view ->
             timer.cancel()
-            TimerState.Paused
+            timerState = TimerState.Paused
             updateButtons()
         }
 
@@ -82,10 +82,12 @@ class Home : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        timerState = PrefUtil.getTimerState(requireContext())
+
         initTimer()
 
         //backgrounded timer
-        removeAlarm(requireActivity())
+        removeAlarm(requireContext())
     }
 
     override fun onPause() {
@@ -93,7 +95,8 @@ class Home : Fragment() {
 
         if(timerState == TimerState.Running){
             //backgrounded timer
-            val wakeUpTime = setAlarm(requireActivity(), nowSeconds, secondsRemaining)
+            val wakeUpTime = setAlarm(requireContext(), nowSeconds, secondsRemaining)
+
         }
         else if (timerState == TimerState.Paused){
 
@@ -135,7 +138,7 @@ class Home : Fragment() {
         //resume timer where we left off
         if(secondsRemaining <= 0)
             endTimer()
-        if(timerState == TimerState.Running)
+        else if(timerState == TimerState.Running)
             beginTimer()
 
         updateButtons()
@@ -193,6 +196,7 @@ class Home : Fragment() {
     }
 
     private fun updateButtons(){
+        timerState = PrefUtil.getTimerState(requireContext())
         when (timerState){
             TimerState.Running ->{
                 binding.timerStart.isEnabled = false

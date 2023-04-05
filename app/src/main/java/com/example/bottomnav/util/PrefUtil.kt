@@ -8,7 +8,7 @@ class PrefUtil {
 
         fun getTimerLength(context: Context): Int{
             //placeholder
-            return 1
+            return 5
         }
 
         private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "com.example.timer.previous_timer_length"
