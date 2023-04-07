@@ -1,8 +1,8 @@
-package com.example.bottomnav.model.dao
+package com.example.bottomnav.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
-import com.example.bottomnav.model.entity.UserStat
+import com.example.bottomnav.data.entity.UserStat
 
 @Dao
 interface UserStatDao {

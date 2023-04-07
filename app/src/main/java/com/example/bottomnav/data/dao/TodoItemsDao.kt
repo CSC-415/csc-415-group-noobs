@@ -1,11 +1,11 @@
-package com.example.bottomnav.model.dao
+package com.example.bottomnav.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.bottomnav.model.entity.TodoItem
+import com.example.bottomnav.data.entity.TodoItem
 
 @Dao
 interface TodoItemsDao {

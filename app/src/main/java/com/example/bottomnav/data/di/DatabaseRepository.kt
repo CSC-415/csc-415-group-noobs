@@ -1,11 +1,10 @@
-package com.example.bottomnav.model.di
+package com.example.bottomnav.data.di
 
 import androidx.lifecycle.LiveData
-import androidx.room.Query
-import com.example.bottomnav.model.dao.TodoItemsDao
-import com.example.bottomnav.model.dao.UserStatDao
-import com.example.bottomnav.model.entity.TodoItem
-import com.example.bottomnav.model.entity.UserStat
+import com.example.bottomnav.data.dao.TodoItemsDao
+import com.example.bottomnav.data.dao.UserStatDao
+import com.example.bottomnav.data.entity.TodoItem
+import com.example.bottomnav.data.entity.UserStat
 
 class DatabaseRepository(private val userStatDao: UserStatDao, private val todoItemsDao: TodoItemsDao) {
 

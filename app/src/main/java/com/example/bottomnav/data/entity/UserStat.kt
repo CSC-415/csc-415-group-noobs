@@ -1,4 +1,4 @@
-package com.example.bottomnav.model.entity
+package com.example.bottomnav.data.entity
 
 import androidx.room.*
 

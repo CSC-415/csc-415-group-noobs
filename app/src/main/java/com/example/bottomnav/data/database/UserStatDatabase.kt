@@ -1,22 +1,22 @@
-package com.example.bottomnav.model.database
+package com.example.bottomnav.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.bottomnav.model.dao.TodoItemsDao
-import com.example.bottomnav.model.entity.TodoItem
+import com.example.bottomnav.data.dao.UserStatDao
+import com.example.bottomnav.data.entity.UserStat
 
-@Database(entities = [TodoItem::class], version = 1)
-abstract class TodoItemDatabase: RoomDatabase(){
+@Database(entities = [UserStat::class], version = 1)
+abstract class UserStatDatabase : RoomDatabase(){
 
-    abstract fun todoItemDao(): TodoItemsDao
+    abstract fun userStatDao(): UserStatDao
 
     companion object{
         @Volatile
         private var INSTANCE: RoomDatabase? = null
 
-        fun getTodoItemDatabase(context: Context):RoomDatabase{
+        fun getUserStatDatabase(context: Context): RoomDatabase{
             val tempInstance = INSTANCE
 
             if(tempInstance != null){
@@ -26,13 +26,13 @@ abstract class TodoItemDatabase: RoomDatabase(){
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    TodoItemDatabase::class.java,
-                    "todo_item_database"
+                    UserStatDatabase::class.java,
+                    "user_stat_database"
                 ).build()
-                INSTANCE = instance
+                INSTANCE= instance
                 return instance
             }
-
         }
     }
+
 }
