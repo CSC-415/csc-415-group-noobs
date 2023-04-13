@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.bottomnav.databinding.ActivityMainBinding
+import com.example.bottomnav.ui.Achievements
+import com.example.bottomnav.ui.Home
+import com.example.bottomnav.ui.Progress
+import com.example.bottomnav.ui.ToDo
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding

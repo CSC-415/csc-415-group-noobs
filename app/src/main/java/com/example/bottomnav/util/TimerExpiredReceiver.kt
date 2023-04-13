@@ -3,7 +3,7 @@ package com.example.bottomnav.util
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.bottomnav.Home
+import com.example.bottomnav.ui.Home
 
 class TimerExpiredReceiver : BroadcastReceiver() {
 
