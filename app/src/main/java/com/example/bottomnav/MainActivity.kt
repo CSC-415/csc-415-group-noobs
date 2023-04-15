@@ -3,8 +3,8 @@ package com.example.bottomnav
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.bottomnav.databinding.ActivityMainBinding
+import com.example.bottomnav.todo.ToDoFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> replaceFrag(Home())
                 R.id.progress -> replaceFrag(Progress())
                 R.id.achievements -> replaceFrag(Achievements())
-                R.id.to_do -> replaceFrag(ToDo())
+                R.id.to_do -> replaceFrag(ToDoFragment())
 
                 else -> {
 
