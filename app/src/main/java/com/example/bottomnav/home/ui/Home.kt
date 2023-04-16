@@ -1,4 +1,4 @@
-package com.example.bottomnav
+package com.example.bottomnav.home.ui
 
 import android.app.Activity
 import android.app.AlarmManager
@@ -7,17 +7,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.health.TimerStat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat.RequestPermissionsRequestCodeValidator
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.util.PrefUtil
 import com.example.bottomnav.util.TimerExpiredReceiver
 import java.util.*
-import kotlin.concurrent.timer
 
 class Home : Fragment() {
     companion object{

@@ -1,7 +1,7 @@
 package com.example.bottomnav.util
 
 import android.content.Context
-import com.example.bottomnav.Home
+import com.example.bottomnav.home.ui.Home
 
 class PrefUtil {
     companion object {

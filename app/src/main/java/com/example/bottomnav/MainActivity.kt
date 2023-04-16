@@ -7,8 +7,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import com.example.bottomnav.achievements.ui.Achievements
 import com.example.bottomnav.databinding.ActivityMainBinding
+import com.example.bottomnav.home.ui.Home
+import com.example.bottomnav.progress.ui.Progress
+import com.example.bottomnav.todo.ui.ToDo
 import com.example.bottomnav.util.PrefUtil
 import com.example.bottomnav.util.TimerExpiredReceiver
 import java.util.*
