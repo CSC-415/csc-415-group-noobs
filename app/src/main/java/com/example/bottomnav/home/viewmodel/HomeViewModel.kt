@@ -1,12 +1,11 @@
-package com.example.bottomnav.viewmodel
+package com.example.bottomnav.home.viewmodel
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.example.bottomnav.ui.Home
-import com.example.bottomnav.util.PrefUtil
+import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.util.PrefUtilInterface
 import com.example.bottomnav.util.TimerExpiredReceiver
 import dagger.hilt.android.lifecycle.HiltViewModel

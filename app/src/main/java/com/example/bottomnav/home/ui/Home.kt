@@ -1,4 +1,4 @@
-package com.example.bottomnav.ui
+package com.example.bottomnav.home.ui
 
 import androidx.fragment.app.activityViewModels
 import android.os.Bundle
@@ -8,13 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bottomnav.databinding.FragmentHomeBinding
-import com.example.bottomnav.util.PrefUtil
-import com.example.bottomnav.util.PrefUtilInterface
-import com.example.bottomnav.viewmodel.HomeViewModel
+import com.example.bottomnav.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class Home : Fragment() {
+    class Home : Fragment() {
 
     //binding data members
     private var _binding: FragmentHomeBinding? = null

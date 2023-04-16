@@ -1,7 +1,7 @@
 package com.example.bottomnav.util
 
 import android.content.Context
-import com.example.bottomnav.ui.Home
+import com.example.bottomnav.home.ui.Home
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
