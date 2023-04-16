@@ -5,4 +5,5 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class PomodoroApplication: Application()
+class PomodoroApplication: Application(){
+}

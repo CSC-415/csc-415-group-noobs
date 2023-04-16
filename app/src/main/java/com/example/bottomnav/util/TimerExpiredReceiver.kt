@@ -4,12 +4,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.example.bottomnav.ui.Home
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class TimerExpiredReceiver : BroadcastReceiver() {
+@AndroidEntryPoint
+class TimerExpiredReceiver @Inject constructor(
+    private val prefUtilInterface: PrefUtilInterface
+) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
-        PrefUtil.setTimerState(Home.TimerState.Stopped, context)
-        PrefUtil.setAlarmSetTime(0, context)
+        prefUtilInterface.setTimerState(Home.TimerState.Stopped)
+        prefUtilInterface.setAlarmSetTime(0)
     }
 }

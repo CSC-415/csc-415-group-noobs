@@ -9,6 +9,7 @@ import com.example.bottomnav.ui.Home
 import com.example.bottomnav.ui.Progress
 import com.example.bottomnav.ui.ToDo
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.internal.DaggerCollections
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

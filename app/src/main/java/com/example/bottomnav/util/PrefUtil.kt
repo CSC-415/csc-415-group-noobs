@@ -2,71 +2,79 @@ package com.example.bottomnav.util
 
 import android.content.Context
 import com.example.bottomnav.ui.Home
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class PrefUtil {
-    companion object {
-    fun getTimerLength(context: Context): Int{
+
+class PrefUtil @Inject constructor(
+    @ApplicationContext appContext: Context
+    ) : PrefUtilInterface {
+    val preferences = appContext.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+
+    override fun getTimerLength(): Int{
         //placeholder
         return 5
     }
 
-    fun getPreviousTimerLengthSeconds(context: Context): Long{
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun getPreviousTimerLengthSeconds(): Long{
         return preferences.getLong(PREVIOUS_TIMER_LENGTH_SECONDS_ID, 0)
     }
 
-    fun setPreviousTimerLengthSeconds(seconds: Long, context: Context){
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun setPreviousTimerLengthSeconds(seconds: Long){
         val editor = preferences.edit()
 
         editor.putLong(PREVIOUS_TIMER_LENGTH_SECONDS_ID, seconds)
         editor.apply()
     }
 
-    fun getTimerState(context: Context): Home.TimerState{
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun getTimerState(): Home.TimerState{
         val ordinal = preferences.getInt(TIMER_STATE_ID, 0)
         return Home.TimerState.values()[ordinal]
     }
 
-    fun setTimerState(state: Home.TimerState, context: Context){
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun setTimerState(state: Home.TimerState){
         val editor = preferences.edit()
 
         editor.putInt(TIMER_STATE_ID, state.ordinal)
         editor.apply()
     }
 
-    fun getSecondsRemaining(context: Context): Long{
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun getSecondsRemaining(): Long{
         return preferences.getLong(SECONDS_REMAINING_ID, 0)
     }
 
-    fun setSecondsRemaining(seconds: Long, context: Context){
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun setSecondsRemaining(seconds: Long){
         val editor = preferences.edit()
 
         editor.putLong(SECONDS_REMAINING_ID, seconds)
         editor.apply()
     }
 
-    fun getAlarmSetTime(context: Context): Long{
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun getAlarmSetTime(): Long{
         return preferences.getLong(ALARM_SET_TIME_ID, 0)
     }
 
-    fun setAlarmSetTime(timeInSeconds: Long, context: Context){
-        val preferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    override fun setAlarmSetTime(timeInSeconds: Long){
         val editor = preferences.edit()
 
         editor.putLong(ALARM_SET_TIME_ID, timeInSeconds)
         editor.apply()
     }
+    companion object {
+        @Volatile
+        private var instance: PrefUtil? = null
 
         private const val SHARED_PREFERENCES = "timerPreferences"
         private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "previous_timer_length"
         private const val TIMER_STATE_ID = "timer_state"
         private const val SECONDS_REMAINING_ID = "seconds_remaining"
         private const val ALARM_SET_TIME_ID = "backgrounded_time"
+
+        fun getInstance(appContext: Context): PrefUtil {
+            return instance ?: synchronized(this) {
+                instance ?: PrefUtil(appContext = appContext).also { instance = it }
+            }
+        }
     }
+
 }

@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.util.PrefUtil
+import com.example.bottomnav.util.PrefUtilInterface
 import com.example.bottomnav.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Home : Fragment() {
 
     //binding data members
@@ -56,7 +59,7 @@ class Home : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        timerState = PrefUtil.getTimerState(requireContext())
+        timerState = homeViewModel.getTimerState()
 
         initTimer()
 
@@ -76,9 +79,9 @@ class Home : Fragment() {
 
         }
 
-        PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, requireContext())
-        PrefUtil.setSecondsRemaining(secondsRemaining, requireContext())
-        PrefUtil.setTimerState(timerState, requireContext())
+        homeViewModel.setPreviousTimerLengthSeconds(timerLengthSeconds)
+        homeViewModel.setSecondsRemaining(secondsRemaining)
+        homeViewModel.setTimerState(timerState)
     }
 
     override fun onCreateView(
@@ -92,7 +95,7 @@ class Home : Fragment() {
 
     //other methods
     private fun initTimer(){
-        timerState = PrefUtil.getTimerState(requireContext())
+        timerState = homeViewModel.getTimerState()
 
         if(timerState == TimerState.Stopped)
             setNewTimerLength()
@@ -100,12 +103,12 @@ class Home : Fragment() {
             setPreviousTimerLength()
 
         secondsRemaining = if(timerState == TimerState.Running || timerState == TimerState.Paused)
-            PrefUtil.getSecondsRemaining(requireContext())
+            homeViewModel.getSecondsRemaining()
         else
             timerLengthSeconds
 
         //change secondsRemaining according to where the background timer stopped
-        val alarmSetTime = PrefUtil.getAlarmSetTime(requireContext())
+        val alarmSetTime = homeViewModel.getAlarmSetTime()
         if(alarmSetTime > 0)
             secondsRemaining -= homeViewModel.getNowSeconds() - alarmSetTime
 
@@ -124,7 +127,7 @@ class Home : Fragment() {
 
         setNewTimerLength()
 
-        PrefUtil.setSecondsRemaining(timerLengthSeconds, requireContext())
+        homeViewModel.setSecondsRemaining(timerLengthSeconds)
         secondsRemaining = timerLengthSeconds
 
         updateButtons()
@@ -145,13 +148,13 @@ class Home : Fragment() {
     }
 
     private fun setNewTimerLength(){
-        val timerLengthInMinutes = PrefUtil.getTimerLength(requireContext())
+        val timerLengthInMinutes = homeViewModel.getTimerLength()
         timerLengthSeconds = timerLengthInMinutes * 60L
         binding.timer.timerProgressBar.max = timerLengthSeconds.toInt()
     }
 
     private fun setPreviousTimerLength(){
-        timerLengthSeconds = PrefUtil.getPreviousTimerLengthSeconds(requireContext())
+        timerLengthSeconds = homeViewModel.getPreviousTimerLengthSeconds()
         binding.timer.timerProgressBar.max = timerLengthSeconds.toInt()
     }
 
