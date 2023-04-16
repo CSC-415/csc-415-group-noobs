@@ -18,28 +18,29 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
     companion object {
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000
-    }
-    fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long):Long{
-        val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, TimerExpiredReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-        prefUtilInterface.setAlarmSetTime(nowSeconds)
-        return wakeUpTime
-    }
 
-    fun removeAlarm(context: Context){
-        val intent = Intent(context, TimerExpiredReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.cancel(pendingIntent)
-        prefUtilInterface.setAlarmSetTime(0)//0 -> alarm is not set
+        fun setAlarm(context: Context, prefUtilInterface: PrefUtilInterface, nowSeconds: Long, secondsRemaining: Long): Long {
+            val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
+            prefUtilInterface.setAlarmSetTime(nowSeconds)
+            return wakeUpTime
+        }
+
+        fun removeAlarm(context: Context, prefUtilInterface: PrefUtilInterface) {
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
+            prefUtilInterface.setAlarmSetTime(0)//0 -> alarm is not set
+        }
     }
 
     fun getNowSeconds() = nowSeconds
-    fun setBackgroundAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long):Long = setAlarm(context, nowSeconds, secondsRemaining)
-    fun removeBackgroundAlarm(context: Context) = removeAlarm(context)
+    fun setBackgroundAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long):Long = setAlarm(context, prefUtilInterface, nowSeconds, secondsRemaining)
+    fun removeBackgroundAlarm(context: Context) = removeAlarm(context, prefUtilInterface)
 
     fun getTimerLength(): Int = prefUtilInterface.getTimerLength()
     fun getPreviousTimerLengthSeconds(): Long = prefUtilInterface.getPreviousTimerLengthSeconds()
