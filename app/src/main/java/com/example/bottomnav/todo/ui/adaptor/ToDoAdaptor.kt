@@ -1,16 +1,16 @@
-package com.example.bottomnav.todo
+package com.example.bottomnav.todo.ui.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bottomnav.todo.db.ToDo
+import com.example.bottomnav.data.entity.ToDoItem
 import com.example.bottomnav.databinding.ToDoCardViewBinding
+import com.example.bottomnav.todo.viewmodel.ToDoViewModel
 
 class ToDoAdaptor(
-    private var todos: List<ToDo>
+    private var todos: List<ToDoItem>,
+    private val viewModel: ToDoViewModel
 ): RecyclerView.Adapter<ToDoAdaptor.ToDoViewHolder>() {
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
         val LayoutInflater = LayoutInflater.from(parent.context)
@@ -26,7 +26,7 @@ class ToDoAdaptor(
         holder.bind(todo)
     }
 
-    fun updateList(newList: List<ToDo>) {
+    fun updateList(newList: List<ToDoItem>) {
         todos = newList
         notifyDataSetChanged()
     }
@@ -36,23 +36,20 @@ class ToDoAdaptor(
         ) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(todo: ToDo){
+        fun bind(todo: ToDoItem){
             binding.todoName.text = todo.task
             binding.todoDue.text = todo.dueDate
             binding.todoPriority.text = todo.priority.toString()
-//            itemView.setOnClickListener { onNoteClicked(todo) }
-//            binding.deleteBtn.setOnClickListener { onNoteDeleteClicked(todo) }
+            binding.deleteBtn.setOnClickListener {
+                deleteTodoItem(todo)
+            }
+        }
+
+        private fun deleteTodoItem(todo: ToDoItem) {
+            // Call the deleteTodo() function in the ToDoViewModel to delete the todo item
+            viewModel.deleteTodo(todo)
         }
 
     }
-
-    interface todoClickDeleteInterface {
-        fun onDeleteIconClick(todo: ToDo)
-    }
-
-    interface todoClickInterface {
-        fun onTodoClick(todo: ToDo)
-    }
-
 
 }

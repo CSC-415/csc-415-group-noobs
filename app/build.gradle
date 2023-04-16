@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id "com.google.dagger.hilt.android"
 }
 
 android {
@@ -34,7 +35,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
@@ -62,7 +62,23 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
+    // Androidx.Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.3"
+    androidTestImplementation "androidx.navigation:navigation-testing:2.5.3"
 
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:2.44.2"
+    kapt "com.google.dagger:hilt-compiler:2.44.2"
+    testImplementation "com.google.dagger:hilt-android-testing:2.44.2"
+    kaptTest "com.google.dagger:hilt-android-compiler:2.44.2"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.44.2"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.44.2"
+}
 
+kapt {
+    correctErrorTypes = true
 }

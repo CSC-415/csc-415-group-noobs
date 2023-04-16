@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dae4f1"
-    tools:context=".todo.ToDoFragment">
+    tools:context=".todo.ui.ToDoFragment">
 
     <TextView
         android:id="@+id/title"

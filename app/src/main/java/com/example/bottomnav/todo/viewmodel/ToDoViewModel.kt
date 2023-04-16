@@ -1,39 +1,34 @@
 package com.example.bottomnav.todo.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
-import com.example.bottomnav.todo.ToDoRepository
-import com.example.bottomnav.todo.db.AppDatabase
-import com.example.bottomnav.todo.db.ToDo
+import com.example.bottomnav.data.repository.DatabaseRepository
+import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.repository.DatabaseRepositoryInterface
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ToDoViewModel(private val repository : ToDoRepository): ViewModel() {
-    val allToDos: LiveData<List<ToDo>>
+@HiltViewModel
+class ToDoViewModel @Inject constructor(
+    private val repository : DatabaseRepositoryInterface
+    ): ViewModel() {
+
+    val allItemToDos: LiveData<List<ToDoItem>>
 
     init {
-        allToDos = repository.allToDos
+        allItemToDos = repository.getAllTodoItems()
     }
 
-    fun deleteTodo(toDo: ToDo) = viewModelScope.launch(Dispatchers.IO){
-        repository.delete(toDo)
+    fun deleteTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+        repository.delete(toDoItem)
     }
 
-    fun updateTodo(toDo: ToDo) = viewModelScope.launch(Dispatchers.IO){
-        repository.update(toDo)
+    fun updateTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+        repository.update(toDoItem)
     }
 
-    fun addTodo(toDo: ToDo) = viewModelScope.launch(Dispatchers.IO){
-        repository.insert(toDo)
-    }
-}
-
-class ToDoViewModelFactory(private val repository: ToDoRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ToDoViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ToDoViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    fun addTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+        repository.insert(toDoItem)
     }
 }
