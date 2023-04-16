@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnav.R
-import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.databinding.FragmentToDoBinding
 import com.example.bottomnav.todo.ui.adaptor.ToDoAdaptor
 import com.example.bottomnav.todo.viewmodel.ToDoViewModel
@@ -20,7 +21,7 @@ class ToDoFragment : Fragment() {
     private lateinit var adaptor: ToDoAdaptor
     private var _binding: FragmentToDoBinding? = null
     private val binding get() = _binding!!
-    private var listOfTodo: List<ToDoItem> = emptyList()
+    private var listOfTodo: List<TodoItem> = emptyList()
 
     private val viewModel: ToDoViewModel by activityViewModels()
 

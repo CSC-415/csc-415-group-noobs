@@ -24,6 +24,16 @@ data class UserStat (
     val todoItemsCompleted: Int,
     @ColumnInfo(name = "total_pomodoro_duration")
     val totalPomodoroDuration: String,//home everytime the pomodoro ends add here
+    @ColumnInfo(name = "total_study_duration")
+    val totalStudyDuration: String,
+    @ColumnInfo(name = "total_work_duration")
+    val totalWorkDuration: String,
+    @ColumnInfo(name = "total_exercise_duration")
+    val totalExerciseDuration: String,
+    @ColumnInfo(name = "total_relax_duration")
+    val totalRelaxDuration: String,
+    @ColumnInfo(name = "total_misc_duration")
+    val totalMiscDuration: String,
     @ColumnInfo(name = "no_of_pomodoro_streaks")
     val noOfPomodoroStreaks: Int,
     @ColumnInfo(name = "no_of_pomodoro_completed")

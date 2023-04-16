@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.example.bottomnav.R
-import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.databinding.FragmentToDoFormBinding
 import com.example.bottomnav.todo.viewmodel.ToDoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,8 +41,8 @@ class AddToDoFragment : Fragment() {
             ?: 0 // Default to 0 if age is not a valid integer
         val due = binding.todoDue.text.toString()
 
-        val todo = ToDoItem(
-            0, name, priority, false, due
+        val todo = TodoItem(
+            0, name,  due, priority, false
         )
 
         lifecycleScope.launch(Dispatchers.IO) {

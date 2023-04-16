@@ -1,21 +1,21 @@
 package com.example.bottomnav.data.repository
 
 import androidx.lifecycle.LiveData
-import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.entity.TodoItem
 
 interface DatabaseRepositoryInterface {
 
-    fun getAllTodoItems():LiveData<List<ToDoItem>>
+    fun getAllTodoItems():LiveData<List<TodoItem>>
 
-    suspend fun insert(toDosItem: ToDoItem){
-
-    }
-
-    suspend fun update(toDosItem: ToDoItem){
+    suspend fun insert(toDosItem: TodoItem){
 
     }
 
-    fun delete(toDosItem: ToDoItem){
+    suspend fun update(toDosItem: TodoItem){
+
+    }
+
+    fun delete(toDosItem: TodoItem){
 
     }
 

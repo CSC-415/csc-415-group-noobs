@@ -3,12 +3,12 @@ package com.example.bottomnav.todo.ui.adaptor
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.databinding.ToDoCardViewBinding
 import com.example.bottomnav.todo.viewmodel.ToDoViewModel
 
 class ToDoAdaptor(
-    private var todos: List<ToDoItem>,
+    private var todos: List<TodoItem>,
     private val viewModel: ToDoViewModel
 ): RecyclerView.Adapter<ToDoAdaptor.ToDoViewHolder>() {
 
@@ -26,7 +26,7 @@ class ToDoAdaptor(
         holder.bind(todo)
     }
 
-    fun updateList(newList: List<ToDoItem>) {
+    fun updateList(newList: List<TodoItem>) {
         todos = newList
         notifyDataSetChanged()
     }
@@ -36,16 +36,16 @@ class ToDoAdaptor(
         ) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(todo: ToDoItem){
-            binding.todoName.text = todo.task
-            binding.todoDue.text = todo.dueDate
+        fun bind(todo: TodoItem){
+            binding.todoName.text = todo.itemName
+            binding.todoDue.text = todo.date
             binding.todoPriority.text = todo.priority.toString()
             binding.deleteBtn.setOnClickListener {
                 deleteTodoItem(todo)
             }
         }
 
-        private fun deleteTodoItem(todo: ToDoItem) {
+        private fun deleteTodoItem(todo: TodoItem) {
             // Call the deleteTodo() function in the ToDoViewModel to delete the todo item
             viewModel.deleteTodo(todo)
         }

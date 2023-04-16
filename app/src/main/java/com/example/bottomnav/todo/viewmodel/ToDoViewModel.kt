@@ -2,7 +2,7 @@ package com.example.bottomnav.todo.viewmodel
 
 import androidx.lifecycle.*
 import com.example.bottomnav.data.repository.DatabaseRepository
-import com.example.bottomnav.data.entity.ToDoItem
+import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.repository.DatabaseRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,21 +14,21 @@ class ToDoViewModel @Inject constructor(
     private val repository : DatabaseRepositoryInterface
     ): ViewModel() {
 
-    val allItemToDos: LiveData<List<ToDoItem>>
+    val allItemToDos: LiveData<List<TodoItem>>
 
     init {
         allItemToDos = repository.getAllTodoItems()
     }
 
-    fun deleteTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+    fun deleteTodo(toDoItem: TodoItem) = viewModelScope.launch(Dispatchers.IO){
         repository.delete(toDoItem)
     }
 
-    fun updateTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+    fun updateTodo(toDoItem: TodoItem) = viewModelScope.launch(Dispatchers.IO){
         repository.update(toDoItem)
     }
 
-    fun addTodo(toDoItem: ToDoItem) = viewModelScope.launch(Dispatchers.IO){
+    fun addTodo(toDoItem: TodoItem) = viewModelScope.launch(Dispatchers.IO){
         repository.insert(toDoItem)
     }
 }
