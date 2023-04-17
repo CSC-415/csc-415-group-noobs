@@ -31,9 +31,9 @@ class Home : Fragment() {
 
         fun removeAlarm(activity: Activity){
             val intent = Intent(activity, TimerExpiredReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
+//            val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
             val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.cancel(pendingIntent)
+//            alarmManager.cancel(pendingIntent)
             PrefUtil.setAlarmSetTime(0, activity)//0 -> alarm is not set
         }
     }

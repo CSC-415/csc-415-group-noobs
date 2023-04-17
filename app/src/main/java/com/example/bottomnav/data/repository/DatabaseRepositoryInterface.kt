@@ -2,6 +2,8 @@ package com.example.bottomnav.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.bottomnav.data.entity.TodoItem
+import com.github.mikephil.charting.data.Entry
+import java.util.*
 
 interface DatabaseRepositoryInterface {
 
@@ -19,4 +21,9 @@ interface DatabaseRepositoryInterface {
 
     }
 
+//    DUMMY DATA FOR GRAPH
+    fun generateRandomData(): List<Entry>
+
+//    TOTAL TASKS / POMODORO FOR PROGRESS PAGE
+    fun getTotalYAxisValues(): Int
 }

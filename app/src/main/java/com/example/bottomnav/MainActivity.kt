@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import com.example.bottomnav.achievements.ui.Achievements
 import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
-import com.example.bottomnav.progress.ui.Progress
 import com.example.bottomnav.todo.ui.ToDoFragment
+import com.example.myapp.ui.progress.ProgressFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.home -> replaceFrag(Home())
-                R.id.progress -> replaceFrag(Progress())
+                R.id.progress -> replaceFrag(ProgressFragment())
                 R.id.achievements -> replaceFrag(Achievements())
                 R.id.to_do -> replaceFrag(ToDoFragment())
 

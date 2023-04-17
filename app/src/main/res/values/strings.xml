@@ -5,4 +5,10 @@
     <string name="todo">ToDo</string>
     <string name="priority">Priority: </string>
     <string name="create">Create</string>
+
+<!--    progress-->
+    <string name="tasks">Tasks</string>
+    <string name="pomodoros">Pomodoros</string>
+    <string name="tasks_completed">Tasks Completed</string>
+    <string name="pomodoros_completed">Pomodoros Completed</string>
 </resources>
