@@ -186,7 +186,7 @@ class Home : Fragment() {
             else
                 "0" + timerSecondsStr
         }"
-        binding.timer.timerProgressBar.progress = (timerLengthSeconds - secondsRemaining).toInt()
+        binding.timer.timerProgressBar.progress = (timerLengthSeconds-(timerLengthSeconds - secondsRemaining)).toInt()
     }
 
     private fun updateButtons(){
