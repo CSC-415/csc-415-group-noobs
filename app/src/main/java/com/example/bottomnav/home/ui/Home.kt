@@ -34,6 +34,8 @@ class Home : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        homeViewModel.resetPrefUtil()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,8 +76,6 @@ class Home : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        timerState = homeViewModel.getTimerState()
-
         initTimer()
 
         //backgrounded timer
@@ -97,6 +97,7 @@ class Home : Fragment() {
         homeViewModel.setPreviousTimerLengthSeconds(timerLengthSeconds)
         homeViewModel.setSecondsRemaining(secondsRemaining)
         homeViewModel.setTimerState(timerState)
+        timer.cancel()
     }
 
     override fun onCreateView(
@@ -122,8 +123,8 @@ class Home : Fragment() {
         else
             timerLengthSeconds
 
-        //change secondsRemaining according to where the background timer stopped
         val alarmSetTime = homeViewModel.getAlarmSetTime()
+        //change secondsRemaining according to where the background timer stopped
         if(alarmSetTime > 0)
             secondsRemaining -= homeViewModel.getNowSeconds() - alarmSetTime
 
@@ -142,18 +143,17 @@ class Home : Fragment() {
 
         setNewTimerLength()
 
+        binding.timer.timerProgressBar.progress = 0
+
         homeViewModel.setSecondsRemaining(timerLengthSeconds)
-//        homeViewModel.setPreviousTimerLengthSeconds(timerLengthSeconds)
         secondsRemaining = timerLengthSeconds
 
         updateButtons()
         updateTimerUI()
-//        homeViewModel.resetPrefUtil()
     }
 
     private fun beginTimer(){
         timerState = TimerState.Running
-        secondsRemaining = homeViewModel.getSecondsRemaining()
 
         timer = object : CountDownTimer(secondsRemaining*1000, 1000){
             override fun onFinish() = endTimer()
@@ -209,10 +209,4 @@ class Home : Fragment() {
             }
         }
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//
-//        homeViewModel.resetPrefUtil()
-//    }
 }
