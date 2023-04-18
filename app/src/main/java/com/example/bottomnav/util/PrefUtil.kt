@@ -9,11 +9,18 @@ import javax.inject.Inject
 class PrefUtil @Inject constructor(
     @ApplicationContext appContext: Context
     ) : PrefUtilInterface {
-    val preferences = appContext.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+
+    private val preferences = appContext.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
     override fun getTimerLength(): Int{
         //placeholder
         return 5
+    }
+
+    override fun resetPrefUtil(){
+        val editor = preferences.edit()
+        editor.clear()
+        editor.apply()
     }
 
     override fun getPreviousTimerLengthSeconds(): Long{
@@ -61,20 +68,12 @@ class PrefUtil @Inject constructor(
         editor.apply()
     }
     companion object {
-        @Volatile
-        private var instance: PrefUtil? = null
-
         private const val SHARED_PREFERENCES = "timerPreferences"
+
         private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "previous_timer_length"
         private const val TIMER_STATE_ID = "timer_state"
         private const val SECONDS_REMAINING_ID = "seconds_remaining"
         private const val ALARM_SET_TIME_ID = "backgrounded_time"
-
-        fun getInstance(appContext: Context): PrefUtil {
-            return instance ?: synchronized(this) {
-                instance ?: PrefUtil(appContext = appContext).also { instance = it }
-            }
-        }
     }
 
 }

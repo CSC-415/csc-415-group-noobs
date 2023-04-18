@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-    class Home : Fragment() {
+class Home : Fragment() {
 
     //binding data members
     private var _binding: FragmentHomeBinding? = null
@@ -36,6 +38,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.categoriesDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                homeViewModel.setSelectedCategory(parent?.getItemAtPosition(position).toString())
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+
+        binding.categoriesDropDown.setSelection(0)
+
         binding.timerStart.setOnClickListener{view ->
             beginTimer()
             timerState = TimerState.Running
@@ -52,6 +67,8 @@ import dagger.hilt.android.AndroidEntryPoint
             timer.cancel()
             endTimer()
         }
+
+
     }
 
     override fun onResume() {
@@ -126,14 +143,17 @@ import dagger.hilt.android.AndroidEntryPoint
         setNewTimerLength()
 
         homeViewModel.setSecondsRemaining(timerLengthSeconds)
+//        homeViewModel.setPreviousTimerLengthSeconds(timerLengthSeconds)
         secondsRemaining = timerLengthSeconds
 
         updateButtons()
         updateTimerUI()
+//        homeViewModel.resetPrefUtil()
     }
 
     private fun beginTimer(){
         timerState = TimerState.Running
+        secondsRemaining = homeViewModel.getSecondsRemaining()
 
         timer = object : CountDownTimer(secondsRemaining*1000, 1000){
             override fun onFinish() = endTimer()
@@ -189,4 +209,10 @@ import dagger.hilt.android.AndroidEntryPoint
             }
         }
     }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//
+//        homeViewModel.resetPrefUtil()
+//    }
 }

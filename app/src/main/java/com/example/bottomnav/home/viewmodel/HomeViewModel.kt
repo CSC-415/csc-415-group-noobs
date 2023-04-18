@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
 import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.util.PrefUtilInterface
@@ -38,7 +39,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private var selectedCategory: String = ""
+    private var selectedCategoryTodoItem: String = ""
+
+    fun setSelectedCategory(cat: String){
+        selectedCategory = cat
+    }
+
     fun getNowSeconds() = nowSeconds
+
+    fun resetPrefUtil() = prefUtilInterface.resetPrefUtil()
     fun setBackgroundAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long):Long = setAlarm(context, prefUtilInterface, nowSeconds, secondsRemaining)
     fun removeBackgroundAlarm(context: Context) = removeAlarm(context, prefUtilInterface)
 

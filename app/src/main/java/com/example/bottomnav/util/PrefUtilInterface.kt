@@ -5,6 +5,8 @@ import com.example.bottomnav.home.ui.Home
 interface PrefUtilInterface {
     fun getTimerLength(): Int
 
+    fun resetPrefUtil()
+
     fun getPreviousTimerLengthSeconds(): Long
 
     fun setPreviousTimerLengthSeconds(seconds: Long)
