@@ -8,4 +8,7 @@
         <item>Relaxation</item>
         <item>Miscellaneous</item>
     </string-array>
+    <string name="todo">ToDo</string>
+    <string name="priority">Priority: </string>
+    <string name="create">Create</string>
 </resources>

@@ -1,9 +1,8 @@
-
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
+    id "com.google.dagger.hilt.android"
 }
 
 android {
@@ -36,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -44,9 +46,22 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // fragments
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //Room DB
+    def room_version = "2.5.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
     // Androidx.Navigation
@@ -55,19 +70,15 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.5.3"
     androidTestImplementation "androidx.navigation:navigation-testing:2.5.3"
 
-    // Hilt
+    // Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.44.2"
     kapt "com.google.dagger:hilt-compiler:2.44.2"
     testImplementation "com.google.dagger:hilt-android-testing:2.44.2"
     kaptTest "com.google.dagger:hilt-android-compiler:2.44.2"
     androidTestImplementation "com.google.dagger:hilt-android-testing:2.44.2"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.44.2"
-
-    // activityViewModels()
-    implementation "androidx.fragment:fragment-ktx:1.5.6"
 }
 
-// Allow references to generated code
 kapt {
-    correctErrorTypes true
+    correctErrorTypes = true
 }
