@@ -14,7 +14,7 @@ class PrefUtil @Inject constructor(
 
     override fun getTimerLength(): Int{
         //placeholder
-        return 5
+        return 1
     }
 
     override fun resetPrefUtil(){
