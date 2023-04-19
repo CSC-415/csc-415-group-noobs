@@ -28,11 +28,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_points" />
 
+    <ImageView
+        android:id="@+id/achievements_overall_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_streak"
+        android:paddingStart="16dp"
+        android:paddingTop="48dp"
+        android:src="@mipmap/badge_icon"/>
+
     <TextView
         android:id="@+id/achievements_overall_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:paddingTop="48dp"
         android:text="Overall"
         android:textSize="24dp"
@@ -43,7 +53,7 @@
         android:id="@+id/achievements_overall_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:text="Level"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +67,9 @@
         android:max="3000"
         android:minWidth="192dp"
         android:paddingStart="24dp"
-        android:paddingEnd="56dp"
+        android:paddingEnd="32dp"
         android:paddingBottom="10dp"
-        android:progress="1500"
+        android:progress="0"
         android:scaleY="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_overall_title" />
@@ -83,13 +93,23 @@
         app:layout_constraintStart_toEndOf="@id/achievements_overall_xp"
         app:layout_constraintTop_toTopOf="@id/achievements_overall_xp" />
 
+    <ImageView
+        android:id="@+id/achievements_cons_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_overall_level"
+        android:src="@mipmap/badge_icon"/>
+
     <TextView
         android:id="@+id/achievements_cons_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:paddingTop="48dp"
-        android:text="Cons"
+        android:text="Streaks"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_overall_level" />
@@ -98,7 +118,7 @@
         android:id="@+id/achievements_cons_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:text="Level"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,9 +132,9 @@
         android:max="1000"
         android:minWidth="192dp"
         android:paddingStart="24dp"
-        android:paddingEnd="56dp"
+        android:paddingEnd="32dp"
         android:paddingBottom="10dp"
-        android:progress="500"
+        android:progress="0"
         android:scaleY="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_cons_title" />
@@ -138,11 +158,21 @@
         app:layout_constraintStart_toEndOf="@id/achievements_cons_xp"
         app:layout_constraintTop_toTopOf="@id/achievements_cons_xp" />
 
+    <ImageView
+        android:id="@+id/achievements_todo_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_cons_level"
+        android:src="@mipmap/badge_icon"/>
+
     <TextView
         android:id="@+id/achievements_todo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:paddingTop="48dp"
         android:text="Todoer"
         android:textSize="24dp"
@@ -153,7 +183,7 @@
         android:id="@+id/achievements_todo_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:text="Level"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,9 +197,9 @@
         android:max="1000"
         android:minWidth="192dp"
         android:paddingStart="24dp"
-        android:paddingEnd="56dp"
+        android:paddingEnd="32dp"
         android:paddingBottom="10dp"
-        android:progress="500"
+        android:progress="0"
         android:scaleY="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_todo_title" />
@@ -193,11 +223,21 @@
         app:layout_constraintStart_toEndOf="@id/achievements_todo_xp"
         app:layout_constraintTop_toTopOf="@id/achievements_todo_xp" />
 
+    <ImageView
+        android:id="@+id/achievements_studier_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_todo_level"
+        android:src="@mipmap/badge_icon"/>
+
     <TextView
         android:id="@+id/achievements_studier_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:paddingTop="48dp"
         android:text="Studier"
         android:textSize="24dp"
@@ -208,7 +248,7 @@
         android:id="@+id/achievements_studier_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="56dp"
+        android:paddingStart="80dp"
         android:text="Level"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -222,9 +262,9 @@
         android:max="1000"
         android:minWidth="192dp"
         android:paddingStart="24dp"
-        android:paddingEnd="56dp"
+        android:paddingEnd="32dp"
         android:paddingBottom="10dp"
-        android:progress="500"
+        android:progress="0"
         android:scaleY="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/achievements_studier_title" />
