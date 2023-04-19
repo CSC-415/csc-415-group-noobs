@@ -61,5 +61,4 @@ class HomeViewModel @Inject constructor(
     fun setPreviousTimerLengthSeconds(seconds: Long) = prefUtilInterface.setPreviousTimerLengthSeconds(seconds)
     fun setTimerState(state: Home.TimerState) = prefUtilInterface.setTimerState(state)
     fun setSecondsRemaining(seconds: Long) = prefUtilInterface.setSecondsRemaining(seconds)
-    fun setAlarmSetTime(timeInSeconds: Long) = prefUtilInterface.setAlarmSetTime(timeInSeconds)
 }
