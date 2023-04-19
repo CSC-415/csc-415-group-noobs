@@ -2,11 +2,11 @@
     <string name="app_name">PomodoroApplication</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="pomodoro_categories">
+        <item>Miscellaneous</item>
         <item>Study</item>
         <item>Work</item>
         <item>Exercise</item>
         <item>Relaxation</item>
-        <item>Miscellaneous</item>
     </string-array>
     <string name="todo">ToDo</string>
     <string name="priority">Priority: </string>

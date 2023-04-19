@@ -22,4 +22,8 @@ interface PrefUtilInterface {
     fun getAlarmSetTime(): Long
 
     fun setAlarmSetTime(timeInSeconds: Long)
+
+    fun getSelectedCategory(): String?
+
+    fun setSelectedCategory(category: String)
 }

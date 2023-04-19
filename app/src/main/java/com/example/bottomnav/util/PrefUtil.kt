@@ -67,6 +67,18 @@ class PrefUtil @Inject constructor(
         editor.putLong(ALARM_SET_TIME_ID, timeInSeconds)
         editor.apply()
     }
+
+    override fun getSelectedCategory(): String?{
+        return preferences.getString(SELECTED_CATEGORY_ID, null)
+    }
+
+    override fun setSelectedCategory(category: String){
+        val editor = preferences.edit()
+
+        editor.putString(SELECTED_CATEGORY_ID, category)
+        editor.apply()
+    }
+
     companion object {
         private const val SHARED_PREFERENCES = "timerPreferences"
 
@@ -74,6 +86,7 @@ class PrefUtil @Inject constructor(
         private const val TIMER_STATE_ID = "timer_state"
         private const val SECONDS_REMAINING_ID = "seconds_remaining"
         private const val ALARM_SET_TIME_ID = "backgrounded_time"
+        private const val SELECTED_CATEGORY_ID = "selected_category"
     }
 
 }

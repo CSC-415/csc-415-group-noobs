@@ -12,13 +12,18 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.bottomnav.MainActivity
 import com.example.bottomnav.R
+import com.example.bottomnav.data.repository.DatabaseRepository
 import com.example.bottomnav.home.ui.Home
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class TimerExpiredReceiver @Inject constructor(
-    private val prefUtilInterface: PrefUtilInterface
+    private val prefUtilInterface: PrefUtilInterface,
+    private val databaseRepository: DatabaseRepository
 ) : BroadcastReceiver() {
 
     private val CHANNEL_ID = "timerExpiredChannel"
@@ -29,6 +34,17 @@ class TimerExpiredReceiver @Inject constructor(
         prefUtilInterface.setTimerState(Home.TimerState.Stopped)
         prefUtilInterface.setAlarmSetTime(0)
 
+        val selectedCategory = prefUtilInterface.getSelectedCategory()
+        val duration = prefUtilInterface.getTimerLength() as Long
+
+        //update pomodoroDuration in database
+        if(selectedCategory != null){
+            GlobalScope.launch(Dispatchers.IO) {
+                databaseRepository.addCompletedPomodoroBasedOnCategory(0, selectedCategory, duration)
+            }
+        }
+
+        //notification
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_circle_notifications_24)
             .setContentTitle("Pomodoro Completed")

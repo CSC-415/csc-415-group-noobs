@@ -5,18 +5,35 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.CountDownTimer
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.bottomnav.data.entity.UserStat
+import com.example.bottomnav.data.repository.DatabaseRepository
 import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.util.PrefUtilInterface
 import com.example.bottomnav.util.TimerExpiredReceiver
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val prefUtilInterface: PrefUtilInterface
+    private val prefUtilInterface: PrefUtilInterface,
+    private val databaseRepository: DatabaseRepository
 ): ViewModel() {
+    private var selectedCategory: String = ""
+    private var selectedCategoryTodoItem: String = ""
+    private var userStat: UserStat = UserStat(0, "Biplov", "Ale", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+    init{
+        viewModelScope.launch(Dispatchers.IO) {
+            databaseRepository.insertUserStat(userStat)
+        }
+    }
+
     companion object {
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000
 
@@ -39,9 +56,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private var selectedCategory: String = ""
-    private var selectedCategoryTodoItem: String = ""
-
     fun setSelectedCategory(cat: String){
         selectedCategory = cat
     }
@@ -58,7 +72,19 @@ class HomeViewModel @Inject constructor(
     fun getSecondsRemaining(): Long = prefUtilInterface.getSecondsRemaining()
     fun getAlarmSetTime(): Long = prefUtilInterface.getAlarmSetTime()
 
+    fun setPrefUtilSelectedCategory(category: String) = prefUtilInterface.setSelectedCategory(category)
+
     fun setPreviousTimerLengthSeconds(seconds: Long) = prefUtilInterface.setPreviousTimerLengthSeconds(seconds)
     fun setTimerState(state: Home.TimerState) = prefUtilInterface.setTimerState(state)
     fun setSecondsRemaining(seconds: Long) = prefUtilInterface.setSecondsRemaining(seconds)
+
+    fun recordCompletedPomodoroDuration() = viewModelScope.launch(Dispatchers.IO) {
+        val pomodoroDurationMinutes = prefUtilInterface.getTimerLength()
+
+        databaseRepository.addCompletedPomodoroBasedOnCategory(0, selectedCategory, getTimerLength() as Long)
+    }
+
+    fun recordPomodoroDuration(duration: Long) = viewModelScope.launch(Dispatchers.IO){
+        databaseRepository.addCompletedPomodoroBasedOnCategory(0, selectedCategory, duration)
+    }
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,10 @@ class Home : Fragment() {
     }
 
     //timer data members
-    private lateinit var timer: CountDownTimer
+    private var timer: CountDownTimer =  object : CountDownTimer(0, 0){
+        override fun onFinish() {}
+        override fun onTick(milisUntilFinished: Long) {}
+    }
     private var timerLengthSeconds: Long= 0L
     private var timerState: TimerState = TimerState.Stopped
     private var secondsRemaining: Long = 0L
@@ -43,15 +47,17 @@ class Home : Fragment() {
 
         binding.categoriesDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                binding.categoriesDropDown.setSelection(position)
                 homeViewModel.setSelectedCategory(parent?.getItemAtPosition(position).toString())
+                homeViewModel.setPrefUtilSelectedCategory(parent?.getItemAtPosition(position).toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
+                binding.categoriesDropDown.setSelection(0)
+                homeViewModel.setSelectedCategory(parent?.getItemAtPosition(0).toString())
+                homeViewModel.setPrefUtilSelectedCategory(parent?.getItemAtPosition(0).toString())
             }
         }
-
-        binding.categoriesDropDown.setSelection(0)
 
         binding.timerStart.setOnClickListener{view ->
             beginTimer()
@@ -67,6 +73,7 @@ class Home : Fragment() {
 
         binding.timerStop.setOnClickListener{ view ->
             timer.cancel()
+            homeViewModel.recordPomodoroDuration(timerLengthSeconds - secondsRemaining)
             endTimer()
         }
 
@@ -156,7 +163,10 @@ class Home : Fragment() {
         timerState = TimerState.Running
 
         timer = object : CountDownTimer(secondsRemaining*1000, 1000){
-            override fun onFinish() = endTimer()
+            override fun onFinish() {
+                endTimer()
+                homeViewModel.recordCompletedPomodoroDuration()
+            }
 
             override fun onTick(milisUntilFinished: Long) {
                 secondsRemaining = milisUntilFinished / 1000
