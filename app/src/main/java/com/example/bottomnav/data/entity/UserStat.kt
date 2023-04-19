@@ -4,6 +4,7 @@ import androidx.room.*
 
 @Entity(tableName = "userTable")
 data class UserStat (
+    @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true)
     val userId: Int,
     @ColumnInfo(name = "user_first_name")
@@ -23,17 +24,17 @@ data class UserStat (
     @ColumnInfo(name = "no_of_todo_items_completed")
     val todoItemsCompleted: Int,
     @ColumnInfo(name = "total_pomodoro_duration")
-    val totalPomodoroDuration: String,//home everytime the pomodoro ends add here
+    val totalPomodoroDuration: Long,//home everytime the pomodoro ends add here
     @ColumnInfo(name = "total_study_duration")
-    val totalStudyDuration: String,
+    val totalStudyDuration: Long,
     @ColumnInfo(name = "total_work_duration")
-    val totalWorkDuration: String,
+    val totalWorkDuration: Long,
     @ColumnInfo(name = "total_exercise_duration")
-    val totalExerciseDuration: String,
+    val totalExerciseDuration: Long,
     @ColumnInfo(name = "total_relax_duration")
-    val totalRelaxDuration: String,
-    @ColumnInfo(name = "total_misc_duration")
-    val totalMiscDuration: String,
+    val totalRelaxDuration: Long,
+    @ColumnInfo(name = "total_miscellaneous_duration")
+    val totalMiscDuration: Long,
     @ColumnInfo(name = "no_of_pomodoro_streaks")
     val noOfPomodoroStreaks: Int,
     @ColumnInfo(name = "no_of_pomodoro_completed")
