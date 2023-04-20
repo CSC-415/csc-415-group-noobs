@@ -31,7 +31,7 @@ class DatabaseRepository @Inject constructor(
     }
     override suspend fun update(userStat: UserStat) = userStatDAO.update(userStat)
 
-    override fun delete(toDosItem: TodoItem){
+     override fun delete(toDosItem: TodoItem){
         todoItemsDAO.delete(toDosItem)
     }
     override fun delete(userStat: UserStat) = userStatDAO.delete(userStat)

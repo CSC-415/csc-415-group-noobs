@@ -15,5 +15,5 @@ data class TodoItem(
     @ColumnInfo(name = "todo_item_priority")
     val priority: Int,
     @ColumnInfo(name = "todo_item_is_completed")
-    val isCompleted: Boolean
+    var isCompleted: Boolean
 )

@@ -11,8 +11,7 @@
     <string name="todo">ToDo</string>
     <string name="priority">Priority: </string>
     <string name="create">Create</string>
-
-<!--    progress-->
+    <string name="mm_dd_yyyy">MM/dd/yyyy</string>
     <string name="tasks">Tasks</string>
     <string name="pomodoros">Pomodoros</string>
     <string name="tasks_completed">Tasks Completed</string>
