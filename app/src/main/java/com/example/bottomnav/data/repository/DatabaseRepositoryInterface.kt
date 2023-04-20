@@ -29,7 +29,6 @@ interface DatabaseRepositoryInterface {
 
     suspend fun addCompletedPomodoroBasedOnCategory(id: Int, category: String, duration: Long)
 
-//    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
     suspend fun getAllUserStat(): List<UserStat>
     suspend fun insertUserStat(userStat: UserStat)
     suspend fun update(userStat: UserStat)

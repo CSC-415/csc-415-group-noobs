@@ -21,18 +21,18 @@ class Home : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val homeViewModel : HomeViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
-    enum class TimerState{
+    enum class TimerState {
         Stopped, Paused, Running
     }
 
     //timer data members
-    private var timer: CountDownTimer =  object : CountDownTimer(0, 0){
+    private var timer: CountDownTimer = object : CountDownTimer(0, 0) {
         override fun onFinish() {}
         override fun onTick(milisUntilFinished: Long) {}
     }
-    private var timerLengthSeconds: Long= 0L
+    private var timerLengthSeconds: Long = 0L
     private var timerState: TimerState = TimerState.Stopped
     private var secondsRemaining: Long = 0L
 
@@ -45,33 +45,45 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.categoriesDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                binding.categoriesDropDown.setSelection(position)
-                homeViewModel.setSelectedCategory(parent?.getItemAtPosition(position).toString())
-                homeViewModel.setPrefUtilSelectedCategory(parent?.getItemAtPosition(position).toString())
+        binding.categoriesDropDown.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    binding.categoriesDropDown.setSelection(position)
+                    homeViewModel.setSelectedCategory(
+                        parent?.getItemAtPosition(position).toString()
+                    )
+                    homeViewModel.setPrefUtilSelectedCategory(
+                        parent?.getItemAtPosition(position).toString()
+                    )
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    binding.categoriesDropDown.setSelection(0)
+                    homeViewModel.setSelectedCategory(parent?.getItemAtPosition(0).toString())
+                    homeViewModel.setPrefUtilSelectedCategory(
+                        parent?.getItemAtPosition(0).toString()
+                    )
+                }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                binding.categoriesDropDown.setSelection(0)
-                homeViewModel.setSelectedCategory(parent?.getItemAtPosition(0).toString())
-                homeViewModel.setPrefUtilSelectedCategory(parent?.getItemAtPosition(0).toString())
-            }
-        }
-
-        binding.timerStart.setOnClickListener{view ->
+        binding.timerStart.setOnClickListener { view ->
             beginTimer()
             timerState = TimerState.Running
             updateButtons()
         }
 
-        binding.timerPause.setOnClickListener{ view ->
+        binding.timerPause.setOnClickListener { view ->
             timer.cancel()
             timerState = TimerState.Paused
             updateButtons()
         }
 
-        binding.timerStop.setOnClickListener{ view ->
+        binding.timerStop.setOnClickListener { view ->
             timer.cancel()
             homeViewModel.recordPomodoroDuration(timerLengthSeconds - secondsRemaining)
             endTimer()
@@ -92,12 +104,15 @@ class Home : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        if(timerState == TimerState.Running){
+        if (timerState == TimerState.Running) {
             //backgrounded timer
-            val wakeUpTime = homeViewModel.setBackgroundAlarm(requireContext(), homeViewModel.getNowSeconds(), secondsRemaining)
+            val wakeUpTime = homeViewModel.setBackgroundAlarm(
+                requireContext(),
+                homeViewModel.getNowSeconds(),
+                secondsRemaining
+            )
 
-        }
-        else if (timerState == TimerState.Paused){
+        } else if (timerState == TimerState.Paused) {
 
         }
 
@@ -117,35 +132,35 @@ class Home : Fragment() {
     }
 
     //other methods
-    private fun initTimer(){
+    private fun initTimer() {
         timerState = homeViewModel.getTimerState()
 
-        if(timerState == TimerState.Stopped)
+        if (timerState == TimerState.Stopped)
             setNewTimerLength()
         else
             setPreviousTimerLength()
 
-        secondsRemaining = if(timerState == TimerState.Running || timerState == TimerState.Paused)
+        secondsRemaining = if (timerState == TimerState.Running || timerState == TimerState.Paused)
             homeViewModel.getSecondsRemaining()
         else
             timerLengthSeconds
 
         val alarmSetTime = homeViewModel.getAlarmSetTime()
         //change secondsRemaining according to where the background timer stopped
-        if(alarmSetTime > 0)
+        if (alarmSetTime > 0)
             secondsRemaining -= homeViewModel.getNowSeconds() - alarmSetTime
 
         //resume timer where we left off
-        if(secondsRemaining <= 0)
+        if (secondsRemaining <= 0)
             endTimer()
-        else if(timerState == TimerState.Running)
+        else if (timerState == TimerState.Running)
             beginTimer()
 
         updateButtons()
         updateTimerUI()
     }
 
-    private fun endTimer(){
+    private fun endTimer() {
         timerState = TimerState.Stopped
 
         setNewTimerLength()
@@ -159,10 +174,10 @@ class Home : Fragment() {
         updateTimerUI()
     }
 
-    private fun beginTimer(){
+    private fun beginTimer() {
         timerState = TimerState.Running
 
-        timer = object : CountDownTimer(secondsRemaining*1000, 1000){
+        timer = object : CountDownTimer(secondsRemaining * 1000, 1000) {
             override fun onFinish() {
                 endTimer()
                 homeViewModel.recordCompletedPomodoroDuration()
@@ -175,44 +190,45 @@ class Home : Fragment() {
         }.start()
     }
 
-    private fun setNewTimerLength(){
+    private fun setNewTimerLength() {
         val timerLengthInMinutes = homeViewModel.getTimerLength()
         timerLengthSeconds = timerLengthInMinutes * 60L
         binding.timer.timerProgressBar.max = timerLengthSeconds.toInt()
     }
 
-    private fun setPreviousTimerLength(){
+    private fun setPreviousTimerLength() {
         timerLengthSeconds = homeViewModel.getPreviousTimerLengthSeconds()
         binding.timer.timerProgressBar.max = timerLengthSeconds.toInt()
     }
 
-    private fun updateTimerUI(){
+    private fun updateTimerUI() {
         val minutesUntilFinished = secondsRemaining / 60
         val secondsInMinutesUntilFinished = secondsRemaining - (minutesUntilFinished * 60)
         val timerSecondsStr = secondsInMinutesUntilFinished.toString()
 
         binding.timer.timerNum.text = "$minutesUntilFinished:${
-            if(timerSecondsStr.length == 2)
+            if (timerSecondsStr.length == 2)
                 timerSecondsStr
             else
                 "0" + timerSecondsStr
         }"
-        binding.timer.timerProgressBar.progress = (timerLengthSeconds-(timerLengthSeconds - secondsRemaining)).toInt()
+        binding.timer.timerProgressBar.progress =
+            (timerLengthSeconds - (timerLengthSeconds - secondsRemaining)).toInt()
     }
 
-    private fun updateButtons(){
-        when (timerState){
-            TimerState.Running ->{
+    private fun updateButtons() {
+        when (timerState) {
+            TimerState.Running -> {
                 binding.timerStart.isEnabled = false
                 binding.timerStop.isEnabled = true
                 binding.timerPause.isEnabled = true
             }
-            TimerState.Stopped ->{
+            TimerState.Stopped -> {
                 binding.timerStart.isEnabled = true
                 binding.timerStop.isEnabled = false
                 binding.timerPause.isEnabled = false
             }
-            TimerState.Paused ->{
+            TimerState.Paused -> {
                 binding.timerStart.isEnabled = true
                 binding.timerStop.isEnabled = true
                 binding.timerPause.isEnabled = false

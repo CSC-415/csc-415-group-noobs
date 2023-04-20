@@ -38,16 +38,6 @@ class AchievementsFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     fun bind() {
-        viewModel.clearUsers()
-        val user = UserStat(
-            1, "John", "Smith", 21,
-            2550, 3100, 1050,
-            830, 6, 60, 60,
-            60, 60, 60, 60,
-            8, 8
-        )
-        viewModel.addUser(user)
-
         allUserStat = viewModel.getAllUsers()
 
         if (!allUserStat.isNullOrEmpty()) {
