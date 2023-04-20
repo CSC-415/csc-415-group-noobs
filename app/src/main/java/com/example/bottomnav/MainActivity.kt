@@ -3,7 +3,7 @@ package com.example.bottomnav
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.bottomnav.achievements.ui.Achievements
+import com.example.bottomnav.achievements.ui.AchievementsFragment
 import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.todo.ui.ToDoFragment
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.home -> replaceFrag(Home())
                 R.id.progress -> replaceFrag(ProgressFragment())
-                R.id.achievements -> replaceFrag(Achievements())
+                R.id.achievements -> replaceFrag(AchievementsFragment())
                 R.id.to_do -> replaceFrag(ToDoFragment())
 
                 else -> {
