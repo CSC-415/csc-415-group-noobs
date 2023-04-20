@@ -91,7 +91,7 @@ class AddToDoFragment : Fragment() {
             binding.todoPriority.error = "This priority is required"
             return false
         }
-        if (binding.todoPriority.getText().toString().toInt() > 10 || binding.todoPriority.getText()
+        if (binding.todoPriority.text.toString().toInt() > 10 || binding.todoPriority.text
                 .toString().toInt() < 0
         ) {
             binding.todoPriority.error = "Must be Between 1 to 10"

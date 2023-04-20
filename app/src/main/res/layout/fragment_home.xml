@@ -12,7 +12,16 @@
         layout="@layout/timer_content"
         tools:layout_editor_absoluteX="-177dp"
         tools:layout_editor_absoluteY="-64dp" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:text="Set:"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/timer_settings_drop_down"
+        app:layout_constraintTop_toTopOf="parent" />
     <Spinner
         android:id="@+id/categories_drop_down"
         android:layout_width="wrap_content"
@@ -22,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/timer_pause"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="14dp"
         />
 
     <Spinner
