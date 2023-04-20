@@ -54,7 +54,7 @@ class SignUp: Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 val userName = s.toString()
 
-                if(!signUpViewModel.isUsernameTaken(userName)){
+                if(signUpViewModel.isUsernameTaken(userName)){
                     isUsernameAllowed = false
                     Toast.makeText(requireContext(), "Already taken!", Toast.LENGTH_SHORT).show()
                 }
@@ -66,7 +66,7 @@ class SignUp: Fragment() {
 
         binding.signUpButton.setOnClickListener(View.OnClickListener {
             if(isUsernameAllowed){
-                val newUserStat = UserStat(0, binding.signUpUsername.toString(), binding.signUpPassword.toString(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                val newUserStat = UserStat(0, binding.signUpUsername.text.toString(), binding.signUpPassword.text.toString(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 signUpViewModel.insertUser(newUserStat)
                 Toast.makeText(requireContext(), "Profile created!", Toast.LENGTH_SHORT).show()
                 pullLoginFragment()

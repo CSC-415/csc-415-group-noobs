@@ -39,8 +39,8 @@ class Login : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         binding.loginButton.setOnClickListener{
-            val username = binding.loginUsername.toString()
-            val password = binding.loginPassword.toString()
+            val username = binding.loginUsername.text.toString()
+            val password = binding.loginPassword.text.toString()
 
             if(loginViewModel.isLoginValid(username, password)){
                 replaceFragment(Home())

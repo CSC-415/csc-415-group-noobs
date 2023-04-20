@@ -7,6 +7,7 @@ import com.example.bottomnav.data.repository.DatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,9 +17,13 @@ class SignUpViewModel @Inject constructor(
     private var isUsernameTaken = false
 
     fun isUsernameTaken(username: String): Boolean {
-        viewModelScope.launch(Dispatchers.IO) {
-            isUsernameTaken = databaseRepository.isUsernameExists(username)
+        runBlocking {
+            val job = viewModelScope.launch(Dispatchers.IO) {
+                isUsernameTaken = databaseRepository.isUsernameExists(username)
+            }
+            job.join()
         }
+
         return isUsernameTaken
     }
 
