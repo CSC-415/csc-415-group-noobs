@@ -25,19 +25,7 @@ class HomeViewModel @Inject constructor(
     private val databaseRepository: DatabaseRepository
 ) : ViewModel() {
     private var selectedCategory: String = ""
-    private var selectedCategoryTodoItem: String = ""
-    private var userStat: UserStat =
-        UserStat(0, "Biplov", "Ale", 22, 4321,
-            3456, 2435, 200, 0,
-            0, 0, 0, 0,
-            0, 0, 5)
-
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            databaseRepository.clearUsers()
-            databaseRepository.insertUserStat(userStat)
-        }
-    }
+    private var selectedTimerLength: String = ""
 
     companion object {
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000
@@ -70,6 +58,10 @@ class HomeViewModel @Inject constructor(
         selectedCategory = cat
     }
 
+    fun setSelectedTimerLength(timLen: String) {
+        selectedTimerLength = timLen
+    }
+
     fun getNowSeconds() = nowSeconds
 
     fun resetPrefUtil() = prefUtilInterface.resetPrefUtil()
@@ -86,6 +78,9 @@ class HomeViewModel @Inject constructor(
 
     fun setPrefUtilSelectedCategory(category: String) =
         prefUtilInterface.setSelectedCategory(category)
+
+    fun setPrefUtilSelectedTimerLength(timLen: String) =
+        prefUtilInterface.setSelectedTimerLength(timLen)
 
     fun setPreviousTimerLengthSeconds(seconds: Long) =
         prefUtilInterface.setPreviousTimerLengthSeconds(seconds)

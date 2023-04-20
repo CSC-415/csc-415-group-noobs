@@ -66,7 +66,11 @@ class SignUp: Fragment() {
 
         binding.signUpButton.setOnClickListener(View.OnClickListener {
             if(isUsernameAllowed){
-                val newUserStat = UserStat(0, binding.signUpUsername.text.toString(), binding.signUpPassword.text.toString(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                val newUserStat = UserStat(0, binding.signUpUsername.text.toString(), binding.signUpPassword.text.toString(),
+                    22, 4321, 3456,
+                    2435, 200, 0,
+                    0, 0, 0, 0,
+                    0, 0, 5)
                 signUpViewModel.insertUser(newUserStat)
                 Toast.makeText(requireContext(), "Profile created!", Toast.LENGTH_SHORT).show()
                 pullLoginFragment()

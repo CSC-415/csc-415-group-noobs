@@ -26,4 +26,7 @@ interface PrefUtilInterface {
     fun getSelectedCategory(): String?
 
     fun setSelectedCategory(category: String)
+
+    fun getSelectedTimerLength(): String?
+    fun setSelectedTimerLength(timLen: String)
 }
