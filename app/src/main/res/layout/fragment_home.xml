@@ -10,6 +10,19 @@
     <include
         android:id="@+id/timer"
         layout="@layout/timer_content"
+        tools:layout_editor_absoluteX="-177dp"
+        tools:layout_editor_absoluteY="-64dp" />
+
+    <Spinner
+        android:id="@+id/categories_drop_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="00:00"
+        android:entries="@array/pomodoro_categories"
+        app:layout_constraintBottom_toTopOf="@id/timer_pause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

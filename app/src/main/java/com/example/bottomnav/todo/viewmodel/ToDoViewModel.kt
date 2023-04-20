@@ -1,7 +1,6 @@
 package com.example.bottomnav.todo.viewmodel
 
 import androidx.lifecycle.*
-import com.example.bottomnav.data.repository.DatabaseRepository
 import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.repository.DatabaseRepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
