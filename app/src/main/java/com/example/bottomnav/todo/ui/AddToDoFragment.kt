@@ -44,7 +44,7 @@ class AddToDoFragment : Fragment() {
         val due = binding.todoDue.text.toString()
 
         val todo = TodoItem(
-            0, name,  due, priority, false
+            0, name, due, priority, false
         )
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -65,13 +65,10 @@ class AddToDoFragment : Fragment() {
 
         binding.submitBtn.setOnClickListener {
 
-//            val name = binding.todoName.text.toString().trim()
-//            val priority = binding.todoPriority.text.toString().trim()
-//            val dueDate = binding.todoDue.text.toString().trim()
 
             val validForm = CheckAllFields()
 
-            if(validForm){
+            if (validForm) {
                 writetodo()
                 //setFragmentResult(requestKey = "requestKey", bundle)
                 activity?.supportFragmentManager?.commit {
@@ -82,12 +79,10 @@ class AddToDoFragment : Fragment() {
             }
 
 
-
-
         }
     }
 
-    fun CheckAllFields(): Boolean{
+    fun CheckAllFields(): Boolean {
         if (binding.todoName.length() == 0) {
             binding.todoName.error = "This name is required"
             return false
@@ -96,19 +91,24 @@ class AddToDoFragment : Fragment() {
             binding.todoPriority.error = "This priority is required"
             return false
         }
-        if (binding.todoPriority.getText().toString().toInt() > 10 || binding.todoPriority.getText().toString().toInt()<0) {
+        if (binding.todoPriority.getText().toString().toInt() > 10 || binding.todoPriority.getText()
+                .toString().toInt() < 0
+        ) {
             binding.todoPriority.error = "Must be Between 1 to 10"
             return false
         }
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_YEAR,-1)
+        calendar.add(Calendar.DAY_OF_YEAR, -1)
         val yesterday = calendar.time
         val dueDateParsed = try {
-            SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).parse(binding.todoDue.text.toString().trim())
+            SimpleDateFormat(
+                "MM/dd/yyyy",
+                Locale.getDefault()
+            ).parse(binding.todoDue.text.toString().trim())
         } catch (e: Exception) {
             null
         }
-        if (dueDateParsed == null ) {
+        if (dueDateParsed == null) {
             // Show error message for invalid due date
             binding.todoDue.error = "Invalid Data Format"
             return false
@@ -117,7 +117,7 @@ class AddToDoFragment : Fragment() {
             // Show error message for invalid due date
             binding.todoDue.error = "Date has already past"
             return false
-            }
+        }
         return true
     }
 

@@ -84,8 +84,6 @@ class ProgressFragment : Fragment() {
         }
     }
     fun styleLineDataSet(lineDataSet: LineDataSet) = lineDataSet.apply {
-//        color = ContextCompat.getColor(context, R.color.off_white)
-//        valueTextColor = ContextCompat.getColor(context, R.color.black_75)
         setDrawValues(true)
         lineWidth = 3f
         isHighlightEnabled = true

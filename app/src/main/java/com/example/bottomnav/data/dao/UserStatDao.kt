@@ -70,11 +70,4 @@ interface UserStatDao {
     )
     suspend fun addCompletedMiscellaneousPomodoroDuration(id: Int, duration: Long)
 
-    //for half done pomodoros
-//    @Query("UPDATE userTable " +
-//            "SET total_:category_duration = :category, " +
-//            "total_pomodoro_duration = total_pomodoro_duration + :duration" +
-//            "WHERE userId = :id")
-//    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
-
 }
