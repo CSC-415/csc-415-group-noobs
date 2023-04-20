@@ -15,6 +15,6 @@ interface DatabaseRepositoryInterface {
     suspend fun insertUserStat(userStat: UserStat)
     suspend fun addCompletedPomodoroBasedOnCategory(id: Int, category: String, duration: Long)
 //    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
-    fun isUsernameExists(username: String): Boolean
-    fun login(username:String, password: String): Boolean
+    suspend fun isUsernameExists(username: String): Boolean
+    suspend fun login(username:String, password: String): Boolean
 }

@@ -13,8 +13,14 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val databaseRepository: DatabaseRepository
 ): ViewModel() {
+    private var isUsernameTaken = false
 
-    fun isUsernameTaken(username: String): Boolean = databaseRepository.isUsernameExists(username)
+    fun isUsernameTaken(username: String): Boolean {
+        viewModelScope.launch(Dispatchers.IO) {
+            isUsernameTaken = databaseRepository.isUsernameExists(username)
+        }
+        return isUsernameTaken
+    }
 
     fun insertUser(userStat: UserStat) = viewModelScope.launch(Dispatchers.IO) {
         databaseRepository.insertUserStat(userStat)

@@ -13,10 +13,10 @@ interface UserStatDao {
     suspend fun insertUserStat(userStat: UserStat)
 
     @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username)")
-    fun isUsernameExists(username: String): Boolean
+    suspend fun isUsernameExists(username: String): Boolean
 
     @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username and password = :password)")
-    fun login(username: String, password: String): Boolean
+    suspend fun login(username: String, password: String): Boolean
 
     @Query("UPDATE userTable " +
             "SET total_study_duration = total_study_duration + :duration, " +

@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.example.bottomnav.achievements.ui.Achievements
 import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
+import com.example.bottomnav.login.ui.Login
 import com.example.bottomnav.progress.ui.Progress
-import com.example.bottomnav.signup.ui.SignUp
 import com.example.bottomnav.todo.ui.ToDoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFrag(SignUp())
+        replaceFrag(Login())
+        binding.bottomNav.isVisible = false
     }
 
     private fun replaceFrag(fragment : Fragment) {
@@ -28,13 +29,11 @@ class MainActivity : AppCompatActivity() {
         val fragTransaction = fragManager.beginTransaction()
         fragTransaction.replace(R.id.frame_layout,fragment)
         fragTransaction.commit()
-        binding.bottomNav.isVisible = false
     }
 
-    private fun setItemSelectedOnBottomNav() {
-        binding.bottomNav.isVisible = true
-
+    fun setItemSelectedOnBottomNav() {
         replaceFrag(Home())
+        binding.bottomNav.isVisible = true
 
         binding.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {

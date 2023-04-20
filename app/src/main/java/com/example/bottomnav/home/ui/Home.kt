@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint

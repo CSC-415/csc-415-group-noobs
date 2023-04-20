@@ -3,13 +3,16 @@ package com.example.bottomnav.signup.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.bottomnav.R
 import com.example.bottomnav.data.entity.UserStat
 import com.example.bottomnav.data.repository.DatabaseRepository
+import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.databinding.FragmentSignupBinding
 import com.example.bottomnav.login.ui.Login
 import com.example.bottomnav.signup.viewmodel.SignUpViewModel
@@ -27,6 +30,16 @@ class SignUp: Fragment() {
     companion object{
         var isUsernameAllowed = false
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,15 +68,20 @@ class SignUp: Fragment() {
             if(isUsernameAllowed){
                 val newUserStat = UserStat(0, binding.signUpUsername.toString(), binding.signUpPassword.toString(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 signUpViewModel.insertUser(newUserStat)
-                replaceLoginFragment()
+                Toast.makeText(requireContext(), "Profile created!", Toast.LENGTH_SHORT).show()
+                pullLoginFragment()
             }
             else{
                 Toast.makeText(requireContext(), "Username is already taken!", Toast.LENGTH_SHORT).show()
             }
         })
+
+        binding.loginButton.setOnClickListener(View.OnClickListener {
+            pullLoginFragment()
+        })
     }
 
-    private fun replaceLoginFragment(){
+    private fun pullLoginFragment(){
         val destinationFragment = Login()
 
         val transaction = requireActivity().supportFragmentManager.beginTransaction()

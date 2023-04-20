@@ -5,6 +5,8 @@ import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.dao.TodoItemsDao
 import com.example.bottomnav.data.dao.UserStatDao
 import com.example.bottomnav.data.entity.UserStat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DatabaseRepository @Inject constructor(
@@ -54,7 +56,11 @@ class DatabaseRepository @Inject constructor(
         }
     }
 
-    override fun isUsernameExists(username: String): Boolean = userStatDAO.isUsernameExists(username)
+    override suspend fun isUsernameExists(username: String): Boolean = withContext(Dispatchers.IO){
+        userStatDAO.isUsernameExists(username)
+    }
 
-    override fun login(username: String, password: String): Boolean = userStatDAO.login(username, password)
+    override suspend fun login(username: String, password: String): Boolean = withContext(Dispatchers.IO){
+        userStatDAO.login(username, password)
+    }
 }
