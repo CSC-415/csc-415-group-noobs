@@ -5,4 +5,5 @@
     <string name="todo">ToDo</string>
     <string name="priority">Priority: </string>
     <string name="create">Create</string>
+    <string name="mm_dd_yyyy">MM/dd/yyyy</string>
 </resources>

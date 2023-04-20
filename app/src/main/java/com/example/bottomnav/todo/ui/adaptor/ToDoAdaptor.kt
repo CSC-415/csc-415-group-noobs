@@ -2,6 +2,7 @@ package com.example.bottomnav.todo.ui.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.databinding.ToDoCardViewBinding
@@ -42,12 +43,23 @@ class ToDoAdaptor(
             binding.todoPriority.text = todo.priority.toString()
             binding.deleteBtn.setOnClickListener {
                 deleteTodoItem(todo)
+                Toast.makeText(itemView.context, "TodoItem DELETED!!!", Toast.LENGTH_SHORT).show()
+            }
+            binding.doneBtn.setOnClickListener {
+                doneTodoItem(todo)
+                Toast.makeText(itemView.context, "TodoItem Completed!!!", Toast.LENGTH_SHORT).show()
             }
         }
 
         private fun deleteTodoItem(todo: TodoItem) {
             // Call the deleteTodo() function in the ToDoViewModel to delete the todo item
             viewModel.deleteTodo(todo)
+        }
+
+        private fun doneTodoItem(todo: TodoItem) {
+            // Call the deleteTodo() function in the ToDoViewModel to delete the todo item
+            todo.isCompleted = true
+            viewModel.updateTodo(todo)
         }
 
     }

@@ -1,13 +1,16 @@
 package com.example.bottomnav.todo.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnav.R
 import com.example.bottomnav.data.entity.TodoItem
@@ -15,6 +18,7 @@ import com.example.bottomnav.databinding.FragmentToDoBinding
 import com.example.bottomnav.todo.ui.adaptor.ToDoAdaptor
 import com.example.bottomnav.todo.viewmodel.ToDoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ToDoFragment : Fragment() {
@@ -25,12 +29,12 @@ class ToDoFragment : Fragment() {
 
     private val viewModel: ToDoViewModel by activityViewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentToDoBinding.inflate(inflater, container, false)
+        setupObservers()
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -61,4 +65,21 @@ class ToDoFragment : Fragment() {
         _binding = null
     }
 
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            viewModel.allItemToDos.observe(viewLifecycleOwner){ toDos ->
+                if(toDos.isEmpty()){
+                    binding.taskRecyclerView.isVisible = false
+                    binding.emptyPage.isVisible=true
+                }
+                else{
+                    binding.taskRecyclerView.isVisible = true
+                    binding.emptyPage.isVisible=false
+                }
+            }
+        }
+    }
+
+
 }
+

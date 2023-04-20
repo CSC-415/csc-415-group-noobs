@@ -16,6 +16,8 @@ import com.example.bottomnav.todo.viewmodel.ToDoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class AddToDoFragment : Fragment() {
@@ -62,14 +64,61 @@ class AddToDoFragment : Fragment() {
         val toDoFragment = ToDoFragment()
 
         binding.submitBtn.setOnClickListener {
-            writetodo()
-            //setFragmentResult(requestKey = "requestKey", bundle)
-            activity?.supportFragmentManager?.commit {
-                setReorderingAllowed(true)
-                replace(R.id.frame_layout, toDoFragment)
-                addToBackStack(null)
+
+//            val name = binding.todoName.text.toString().trim()
+//            val priority = binding.todoPriority.text.toString().trim()
+//            val dueDate = binding.todoDue.text.toString().trim()
+
+            val validForm = CheckAllFields()
+
+            if(validForm){
+                writetodo()
+                //setFragmentResult(requestKey = "requestKey", bundle)
+                activity?.supportFragmentManager?.commit {
+                    setReorderingAllowed(true)
+                    replace(R.id.frame_layout, toDoFragment)
+                    addToBackStack(null)
+                }
             }
+
+
+
+
         }
+    }
+
+    fun CheckAllFields(): Boolean{
+        if (binding.todoName.length() == 0) {
+            binding.todoName.error = "This name is required"
+            return false
+        }
+        if (binding.todoPriority.length() == 0) {
+            binding.todoPriority.error = "This priority is required"
+            return false
+        }
+        if (binding.todoPriority.getText().toString().toInt() > 10 || binding.todoPriority.getText().toString().toInt()<0) {
+            binding.todoPriority.error = "Must be Between 1 to 10"
+            return false
+        }
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR,-1)
+        val yesterday = calendar.time
+        val dueDateParsed = try {
+            SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).parse(binding.todoDue.text.toString().trim())
+        } catch (e: Exception) {
+            null
+        }
+        if (dueDateParsed == null ) {
+            // Show error message for invalid due date
+            binding.todoDue.error = "Invalid Data Format"
+            return false
+        }
+        if (dueDateParsed.before(yesterday)) {
+            // Show error message for invalid due date
+            binding.todoDue.error = "Date has already past"
+            return false
+            }
+        return true
     }
 
 }

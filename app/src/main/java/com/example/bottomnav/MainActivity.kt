@@ -3,7 +3,7 @@ package com.example.bottomnav
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.bottomnav.achievement.ui.Achievements
+import com.example.bottomnav.achievements.ui.Achievements
 import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.progress.ui.Progress

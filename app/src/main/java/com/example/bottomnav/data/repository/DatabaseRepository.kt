@@ -3,6 +3,7 @@ package com.example.bottomnav.data.repository
 import androidx.lifecycle.LiveData
 import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.dao.TodoItemsDao
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DatabaseRepository @Inject constructor(private val todoItemsDAO: TodoItemsDao): DatabaseRepositoryInterface {
@@ -19,7 +20,7 @@ class DatabaseRepository @Inject constructor(private val todoItemsDAO: TodoItems
         todoItemsDAO.update(toDosItem)
     }
 
-    override fun delete(toDosItem: TodoItem){
+     override fun delete(toDosItem: TodoItem){
         todoItemsDAO.delete(toDosItem)
     }
 
