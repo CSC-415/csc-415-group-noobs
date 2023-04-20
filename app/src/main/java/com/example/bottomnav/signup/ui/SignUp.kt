@@ -7,8 +7,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.bottomnav.R
 import com.example.bottomnav.data.entity.UserStat
+import com.example.bottomnav.data.repository.DatabaseRepository
 import com.example.bottomnav.databinding.FragmentSignupBinding
+import com.example.bottomnav.login.ui.Login
 import com.example.bottomnav.signup.viewmodel.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,22 +28,14 @@ class SignUp: Fragment() {
         var isUsernameAllowed = false
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signUpUsername.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // This method is called to notify you that, within `s`, the `count` characters
-                // beginning at `start` are about to be replaced by new text with length `after`.
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // This method is called to notify you that, within `s`, the `count` characters
-                // beginning at `start` have just replaced old text that had length `before`.
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -48,7 +43,7 @@ class SignUp: Fragment() {
 
                 if(!signUpViewModel.isUsernameTaken(userName)){
                     isUsernameAllowed = false
-                    Toast.makeText(requireContext(), "Username is already taken!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Already taken!", Toast.LENGTH_SHORT).show()
                 }
                 else{
                     isUsernameAllowed = true
@@ -57,7 +52,23 @@ class SignUp: Fragment() {
         })
 
         binding.signUpButton.setOnClickListener(View.OnClickListener {
-
+            if(isUsernameAllowed){
+                val newUserStat = UserStat(0, binding.signUpUsername.toString(), binding.signUpPassword.toString(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                signUpViewModel.insertUser(newUserStat)
+                replaceLoginFragment()
+            }
+            else{
+                Toast.makeText(requireContext(), "Username is already taken!", Toast.LENGTH_SHORT).show()
+            }
         })
+    }
+
+    private fun replaceLoginFragment(){
+        val destinationFragment = Login()
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_layout, destinationFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

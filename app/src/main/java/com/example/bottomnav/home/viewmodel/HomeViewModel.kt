@@ -25,14 +25,14 @@ class HomeViewModel @Inject constructor(
     private val databaseRepository: DatabaseRepository
 ): ViewModel() {
     private var selectedCategory: String = ""
-    private var selectedCategoryTodoItem: String = ""
-    private var userStat: UserStat = UserStat(0, "Biplov", "Ale", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-    init{
-        viewModelScope.launch(Dispatchers.IO) {
-            databaseRepository.insertUserStat(userStat)
-        }
-    }
+//    private var selectedCategoryTodoItem: String = ""
+//    private var userStat: UserStat = UserStat(0, "Biplov", "Ale", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+//
+//    init{
+//        viewModelScope.launch(Dispatchers.IO) {
+//            databaseRepository.insertUserStat(userStat)
+//        }
+//    }
 
     companion object {
         val nowSeconds: Long get() = Calendar.getInstance().timeInMillis / 1000

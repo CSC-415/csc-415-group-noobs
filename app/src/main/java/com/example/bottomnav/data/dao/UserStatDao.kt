@@ -12,10 +12,10 @@ interface UserStatDao {
     @Insert
     suspend fun insertUserStat(userStat: UserStat)
 
-    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username")
+    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username)")
     fun isUsernameExists(username: String): Boolean
 
-    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username and password = :password")
+    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username and password = :password)")
     fun login(username: String, password: String): Boolean
 
     @Query("UPDATE userTable " +
