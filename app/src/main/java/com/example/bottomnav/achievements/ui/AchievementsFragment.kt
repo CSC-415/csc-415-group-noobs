@@ -46,16 +46,16 @@ class AchievementsFragment : Fragment() {
             binding.achievementsPoints.text = user.currencyPoints.toString() + " Points"
             binding.achievementsStreak.text = user.noOfPomodoroStreaks.toString() + " Day Streak"
             binding.achievementsOverallLevel.text = "LV " + levels[0].toString()
-            binding.achievementsOverallXp.text = levels[4].toString()
+            binding.achievementsOverallXp.text = levels[4].toString() + " / 3000"
             binding.achievementsOverallXpbar.progress = levels[4]
             binding.achievementsConsLevel.text = "LV " + levels[1].toString()
-            binding.achievementsConsXp.text = levels[5].toString()
+            binding.achievementsConsXp.text = levels[5].toString() + " / 1000"
             binding.achievementsConsXpbar.progress = levels[5]
             binding.achievementsTodoLevel.text = "LV " + levels[2].toString()
-            binding.achievementsTodoXp.text = levels[6].toString()
+            binding.achievementsTodoXp.text = levels[6].toString() + " / 1000"
             binding.achievementsTodoXpbar.progress = levels[6]
             binding.achievementsStudierLevel.text = "LV " + levels[3].toString()
-            binding.achievementsStudierXp.text = levels[7].toString()
+            binding.achievementsStudierXp.text = levels[7].toString() + " / 1000"
             binding.achievementsStudierXpbar.progress = levels[7]
         }
     }

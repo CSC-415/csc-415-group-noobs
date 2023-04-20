@@ -2,4 +2,7 @@
 <resources>
     <dimen name="fab_bigger_margin">44dp</dimen>
     <dimen name="timer_setting_margin">16dp</dimen>
+    <dimen name="AchievementsPadding1">32dp</dimen>
+    <dimen name="AchievementsPadding2">64dp</dimen>
+    <dimen name="XPBarWidth">128dp</dimen>
 </resources>
