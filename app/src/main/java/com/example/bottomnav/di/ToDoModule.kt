@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.bottomnav.data.database.TodoItemDatabase
 import com.example.bottomnav.data.dao.TodoItemsDao
+import com.example.bottomnav.data.dao.UserStatDao
+import com.example.bottomnav.data.database.UserStatDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +29,5 @@ object ToDoModule {
     fun providesTodoDAO(todoItemDatabase: TodoItemDatabase): TodoItemsDao {
         return todoItemDatabase.getTodoDao()
     }
+
 }

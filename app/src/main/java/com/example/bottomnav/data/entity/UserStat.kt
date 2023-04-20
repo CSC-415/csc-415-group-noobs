@@ -3,7 +3,7 @@ package com.example.bottomnav.data.entity
 import androidx.room.*
 
 @Entity(tableName = "userTable")
-data class UserStat (
+data class UserStat(
     @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true)
     val userId: Int,

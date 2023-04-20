@@ -10,46 +10,42 @@ import javax.inject.Inject
 class DatabaseRepository @Inject constructor(
     private val todoItemsDAO: TodoItemsDao,
     private val userStatDAO: UserStatDao
-): DatabaseRepositoryInterface {
+) : DatabaseRepositoryInterface {
 
-    val allItemToDos: LiveData<List<TodoItem>> = todoItemsDAO.getAllToDo()
+    private val allItemToDos: LiveData<List<TodoItem>> = todoItemsDAO.getAllToDo()
 
-    override fun getAllTodoItems() = allItemToDos
+    override fun getAllTodoItems() = todoItemsDAO.getAllToDo()
 
-    override suspend fun insert(toDosItem: TodoItem){
-        todoItemsDAO.insert(toDosItem)
-    }
+    override suspend fun getAllUserStat() = userStatDAO.getAllUserStat()
 
-    override suspend fun update(toDosItem: TodoItem){
-        todoItemsDAO.update(toDosItem)
-    }
+    override suspend fun insert(toDosItem: TodoItem) = todoItemsDAO.insert(toDosItem)
 
-    override fun delete(toDosItem: TodoItem){
-        todoItemsDAO.delete(toDosItem)
-    }
+    override suspend fun insertUserStat(userStat: UserStat) = userStatDAO.insertUserStat(userStat)
 
-    override suspend fun insertUserStat(userStat: UserStat){
-        userStatDAO.insertUserStat(userStat)
-    }
+    override suspend fun update(toDosItem: TodoItem) = todoItemsDAO.update(toDosItem)
+
+    override suspend fun update(userStat: UserStat) = userStatDAO.update(userStat)
+
+    override fun delete(toDosItem: TodoItem) = todoItemsDAO.delete(toDosItem)
+
+    override fun delete(userStat: UserStat) = userStatDAO.delete(userStat)
+
+    override fun clearUsers() = userStatDAO.clear()
 
     override suspend fun addCompletedPomodoroBasedOnCategory(
         id: Int,
         category: String,
         duration: Long
     ) {
-        if(category.equals("Study")){
+        if (category.equals("Study")) {
             userStatDAO.addCompletedStudyPomodoroDuration(id, duration)
-        }
-        else if(category.equals("Work")){
+        } else if (category.equals("Work")) {
             userStatDAO.addCompletedWorkPomodoroDuration(id, duration)
-        }
-        else if(category.equals("Exercise")){
+        } else if (category.equals("Exercise")) {
             userStatDAO.addCompletedExercisePomodoroDuration(id, duration)
-        }
-        else if(category.equals("Relaxation")){
+        } else if (category.equals("Relaxation")) {
             userStatDAO.addCompletedRelaxPomodoroDuration(id, duration)
-        }
-        else{
+        } else {
             userStatDAO.addCompletedMiscellaneousPomodoroDuration(id, duration)
         }
     }

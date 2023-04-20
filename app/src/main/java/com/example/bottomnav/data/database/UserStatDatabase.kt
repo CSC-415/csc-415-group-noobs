@@ -8,7 +8,7 @@ import com.example.bottomnav.data.dao.UserStatDao
 import com.example.bottomnav.data.entity.UserStat
 
 @Database(entities = [UserStat::class], version = 5)
-abstract class UserStatDatabase : RoomDatabase(){
+abstract class UserStatDatabase : RoomDatabase() {
     abstract fun getUserStatDao(): UserStatDao
 
 }
