@@ -40,7 +40,7 @@ class TimerExpiredReceiver @Inject constructor(
         //update pomodoroDuration in database
         if(selectedCategory != null){
             GlobalScope.launch(Dispatchers.IO) {
-                databaseRepository.addCompletedPomodoroBasedOnCategory(0, selectedCategory, duration)
+                databaseRepository.addPomodoroDurationBasedOnCategory(0, selectedCategory, duration)
             }
         }
 

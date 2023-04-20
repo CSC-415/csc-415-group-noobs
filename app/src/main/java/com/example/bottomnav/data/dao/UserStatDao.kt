@@ -4,13 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.example.bottomnav.data.entity.UserStat
 
 @Dao
 interface UserStatDao {
-
-    @Insert
-    suspend fun insertUserStat(userStat: UserStat)
+    @Query("SELECT * FROM userTable")
+    suspend fun getAllUserStat(): List<UserStat>
 
     @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username)")
     suspend fun isUsernameExists(username: String): Boolean
@@ -18,45 +19,61 @@ interface UserStatDao {
     @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username and password = :password)")
     suspend fun login(username: String, password: String): Boolean
 
-    @Query("UPDATE userTable " +
-            "SET total_study_duration = total_study_duration + :duration, " +
-            "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
-            "total_pomodoro_duration = total_pomodoro_duration + :duration " +
-            "WHERE user_id = :id")
-    suspend fun addCompletedStudyPomodoroDuration(id: Int, duration: Long)
+    @Insert
+    suspend fun insertUserStat(userStat: UserStat)
 
-    @Query("UPDATE userTable " +
-            "SET total_work_duration = total_work_duration + :duration, " +
-            "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
-            "total_pomodoro_duration = total_pomodoro_duration + :duration " +
-            "WHERE user_id = :id")
-    suspend fun addCompletedWorkPomodoroDuration(id: Int, duration: Long)
+    @Update
+    suspend fun update(userStat: UserStat)
 
-    @Query("UPDATE userTable " +
-            "SET total_exercise_duration = total_exercise_duration + :duration, " +
-            "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
-            "total_pomodoro_duration = total_pomodoro_duration + :duration " +
-            "WHERE user_id = :id")
-    suspend fun addCompletedExercisePomodoroDuration(id: Int, duration: Long)
+    @Delete
+    fun delete(userStat: UserStat)
 
-    @Query("UPDATE userTable " +
-            "SET total_relax_duration = total_relax_duration + :duration, " +
-            "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
-            "total_pomodoro_duration = total_pomodoro_duration + :duration " +
-            "WHERE user_id = :id")
-    suspend fun addCompletedRelaxPomodoroDuration(id: Int, duration: Long)
+    @Query("DELETE FROM userTable")
+    fun clear();
 
-    @Query("UPDATE userTable " +
-            "SET total_miscellaneous_duration = total_miscellaneous_duration + :duration, " +
-            "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
-            "total_pomodoro_duration = total_pomodoro_duration + :duration " +
-            "WHERE user_id = :id")
-    suspend fun addCompletedMiscellaneousPomodoroDuration(id: Int, duration: Long)
+    @Query(
+        "UPDATE userTable " +
+                "SET total_study_duration = total_study_duration + :duration, " +
+                "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
+                "total_pomodoro_duration = total_pomodoro_duration + :duration " +
+                "WHERE user_id = :id"
+    )
+    suspend fun addStudyPomodoroDuration(id: Int, duration: Long)
 
-    //for half done pomodoros
-//    @Query("UPDATE userTable " +
-//            "SET total_:category_duration = :category, " +
-//            "total_pomodoro_duration = total_pomodoro_duration + :duration" +
-//            "WHERE userId = :id")
-//    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
+    @Query(
+        "UPDATE userTable " +
+                "SET total_work_duration = total_work_duration + :duration, " +
+                "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
+                "total_pomodoro_duration = total_pomodoro_duration + :duration " +
+                "WHERE user_id = :id"
+    )
+    suspend fun addWorkPomodoroDuration(id: Int, duration: Long)
+
+    @Query(
+        "UPDATE userTable " +
+                "SET total_exercise_duration = total_exercise_duration + :duration, " +
+                "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
+                "total_pomodoro_duration = total_pomodoro_duration + :duration " +
+                "WHERE user_id = :id"
+    )
+    suspend fun addExercisePomodoroDuration(id: Int, duration: Long)
+
+    @Query(
+        "UPDATE userTable " +
+                "SET total_relax_duration = total_relax_duration + :duration, " +
+                "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
+                "total_pomodoro_duration = total_pomodoro_duration + :duration " +
+                "WHERE user_id = :id"
+    )
+    suspend fun addRelaxPomodoroDuration(id: Int, duration: Long)
+
+    @Query(
+        "UPDATE userTable " +
+                "SET total_miscellaneous_duration = total_miscellaneous_duration + :duration, " +
+                "no_of_pomodoro_completed = no_of_pomodoro_completed + 1, " +
+                "total_pomodoro_duration = total_pomodoro_duration + :duration " +
+                "WHERE user_id = :id"
+    )
+    suspend fun addMiscellaneousPomodoroDuration(id: Int, duration: Long)
+
 }

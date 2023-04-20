@@ -1,20 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/purple_200"
-tools:context=".achievements.ui.Achievements">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="@color/teal_700"
+    tools:context=".achievements.ui.AchievementsFragment">
 
-<!-- TODO: Update blank fragment layout -->
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Achievements"
-    android:textSize="36dp"
-    android:layout_gravity="center"
+    <TextView
+        android:id="@+id/achievements_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/AchievementsPadding1"
+        android:paddingTop="@dimen/AchievementsPadding1"
+        android:text="Points"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    />
+    <TextView
+        android:id="@+id/achievements_streak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/AchievementsPadding1"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:text="Streak"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <ImageView
+        android:id="@+id/achievements_overall_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/AchievementsPadding1"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:src="@mipmap/badge_icon_round"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_points" />
+
+    <ProgressBar
+        android:id="@+id/achievements_overall_xpbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="3000"
+        android:minWidth="@dimen/XPBarWidth"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:paddingBottom="8dp"
+        android:progress="0"
+        android:scaleY="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_overall_title" />
+
+    <TextView
+        android:id="@+id/achievements_overall_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:text="Overall"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toStartOf="@id/achievements_overall_xpbar"
+        app:layout_constraintStart_toEndOf="@id/achievements_overall_badge"
+        app:layout_constraintTop_toBottomOf="@id/achievements_points" />
+
+    <TextView
+        android:id="@+id/achievements_overall_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="@id/achievements_overall_title"
+        app:layout_constraintTop_toBottomOf="@id/achievements_overall_title" />
+
+    <TextView
+        android:id="@+id/achievements_overall_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:text="XP / 3000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/achievements_overall_level"
+        app:layout_constraintEnd_toEndOf="@id/achievements_overall_xpbar"
+        app:layout_constraintStart_toStartOf="@id/achievements_overall_xpbar" />
+
+
+    <ImageView
+        android:id="@+id/achievements_cons_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/AchievementsPadding1"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:src="@mipmap/badge_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_overall_level" />
+
+    <ProgressBar
+        android:id="@+id/achievements_cons_xpbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="1000"
+        android:minWidth="@dimen/XPBarWidth"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:paddingBottom="8dp"
+        android:progress="0"
+        android:scaleY="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_cons_title" />
+
+    <TextView
+        android:id="@+id/achievements_cons_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:text="Streaks"
+        android:textSize="24dp"
+        app:layout_constraintStart_toEndOf="@+id/achievements_cons_badge"
+        app:layout_constraintEnd_toStartOf="@id/achievements_cons_xpbar"
+        app:layout_constraintTop_toBottomOf="@id/achievements_overall_level" />
+
+    <TextView
+        android:id="@+id/achievements_cons_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="@id/achievements_cons_title"
+        app:layout_constraintTop_toBottomOf="@id/achievements_cons_title" />
+
+    <TextView
+        android:id="@+id/achievements_cons_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:text="XP / 1000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/achievements_cons_level"
+        app:layout_constraintEnd_toEndOf="@id/achievements_cons_xpbar"
+        app:layout_constraintStart_toStartOf="@id/achievements_cons_xpbar" />
+
+
+    <ImageView
+        android:id="@+id/achievements_todo_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/AchievementsPadding1"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:src="@mipmap/badge_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_cons_level" />
+
+    <ProgressBar
+        android:id="@+id/achievements_todo_xpbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="1000"
+        android:minWidth="@dimen/XPBarWidth"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:paddingBottom="8dp"
+        android:progress="0"
+        android:scaleY="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_todo_title" />
+
+    <TextView
+        android:id="@+id/achievements_todo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:text="Todoer"
+        android:textSize="24dp"
+        app:layout_constraintStart_toEndOf="@+id/achievements_todo_badge"
+        app:layout_constraintEnd_toStartOf="@id/achievements_todo_xpbar"
+        app:layout_constraintTop_toBottomOf="@id/achievements_cons_level" />
+
+    <TextView
+        android:id="@+id/achievements_todo_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="@id/achievements_todo_title"
+        app:layout_constraintTop_toBottomOf="@id/achievements_todo_title" />
+
+    <TextView
+        android:id="@+id/achievements_todo_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:text="XP / 1000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/achievements_todo_level"
+        app:layout_constraintEnd_toEndOf="@id/achievements_todo_xpbar"
+        app:layout_constraintStart_toStartOf="@id/achievements_todo_xpbar" />
+
+
+    <ImageView
+        android:id="@+id/achievements_studier_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/AchievementsPadding1"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:src="@mipmap/badge_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_todo_level" />
+
+    <ProgressBar
+        android:id="@+id/achievements_studier_xpbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="1000"
+        android:minWidth="@dimen/XPBarWidth"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:paddingBottom="8dp"
+        android:progress="0"
+        android:scaleY="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/achievements_studier_title" />
+
+    <TextView
+        android:id="@+id/achievements_studier_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/AchievementsPadding2"
+        android:text="Studier"
+        android:textSize="24dp"
+        app:layout_constraintStart_toEndOf="@+id/achievements_studier_badge"
+        app:layout_constraintEnd_toStartOf="@id/achievements_studier_xpbar"
+        app:layout_constraintTop_toBottomOf="@id/achievements_todo_level" />
+
+    <TextView
+        android:id="@+id/achievements_studier_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="@id/achievements_studier_title"
+        app:layout_constraintTop_toBottomOf="@id/achievements_studier_title" />
+
+    <TextView
+        android:id="@+id/achievements_studier_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/AchievementsPadding1"
+        android:text="XP / 1000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/achievements_studier_level"
+        app:layout_constraintEnd_toEndOf="@id/achievements_studier_xpbar"
+        app:layout_constraintStart_toStartOf="@id/achievements_studier_xpbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/timer_setting_margin"
-        android:src="@drawable/baseline_timer_settings_24"/>
+        android:src="@drawable/baseline_timer_settings_24"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/timer_stop"
