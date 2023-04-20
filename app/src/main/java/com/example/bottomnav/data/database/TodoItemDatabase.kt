@@ -6,7 +6,7 @@ import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.dao.TodoItemsDao
 
 
-@Database(entities = [TodoItem::class], version = 5)
+@Database(entities = [TodoItem::class], version = 6)
 abstract class TodoItemDatabase : RoomDatabase() {
     abstract fun getTodoDao(): TodoItemsDao
 

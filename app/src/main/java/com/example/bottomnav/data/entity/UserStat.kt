@@ -7,12 +7,10 @@ data class UserStat (
     @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true)
     val userId: Int,
-    @ColumnInfo(name = "user_first_name")
-    val firstName: String,
-    @ColumnInfo(name = "user_last_name")
-    val lastName: String,
-    @ColumnInfo(name = "user_age")
-    val age: Int,
+    @ColumnInfo(name = "user_name")
+    val username: String,
+    @ColumnInfo(name = "password")
+    val password: String,
     @ColumnInfo(name = "consistency_experience_points")
     val consistencyExperiencePoints: Int,
     @ColumnInfo(name = "todoer_experience_points")

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.bottomnav.data.dao.UserStatDao
 import com.example.bottomnav.data.entity.UserStat
 
-@Database(entities = [UserStat::class], version = 5)
+@Database(entities = [UserStat::class], version = 6)
 abstract class UserStatDatabase : RoomDatabase(){
     abstract fun getUserStatDao(): UserStatDao
 

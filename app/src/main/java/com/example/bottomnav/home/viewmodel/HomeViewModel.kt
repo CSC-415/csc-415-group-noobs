@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(
 ): ViewModel() {
     private var selectedCategory: String = ""
     private var selectedCategoryTodoItem: String = ""
-    private var userStat: UserStat = UserStat(0, "Biplov", "Ale", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    private var userStat: UserStat = UserStat(0, "Biplov", "Ale", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     init{
         viewModelScope.launch(Dispatchers.IO) {

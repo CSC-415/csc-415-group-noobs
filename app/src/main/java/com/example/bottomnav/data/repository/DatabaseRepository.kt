@@ -53,4 +53,8 @@ class DatabaseRepository @Inject constructor(
             userStatDAO.addCompletedMiscellaneousPomodoroDuration(id, duration)
         }
     }
+
+    override fun isUsernameExists(username: String): Boolean = userStatDAO.isUsernameExists(username)
+
+    override fun login(username: String, password: String): Boolean = userStatDAO.login(username, password)
 }
