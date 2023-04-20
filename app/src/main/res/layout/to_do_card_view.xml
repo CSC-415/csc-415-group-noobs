@@ -7,12 +7,14 @@
     android:layout_margin="16dp"
     android:elevation="8dp"
     app:cardCornerRadius="5dp"
+
     xmlns:tools="http://schemas.android.com/tools"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/teal_100"
         >
 
         <TextView
@@ -23,13 +25,14 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="30sp"
             tools:text="Rick"
+            android:textColor="@color/black"
             android:padding="5dp"/>
 
         <TextView
             android:id="@+id/todo_priority_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/todo_due"
+            app:layout_constraintStart_toStartOf="@id/todo_name"
             app:layout_constraintTop_toBottomOf="@id/todo_due"
             android:textSize="15sp"
             android:text="@string/priority"
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/todo_name"
             app:layout_constraintTop_toBottomOf="@id/todo_name"
+            android:layout_marginStart="5dp"
             android:textSize="24sp"
             tools:text="Today" />
 
