@@ -94,9 +94,9 @@ class HomeViewModel @Inject constructor(
     fun setSecondsRemaining(seconds: Long) = prefUtilInterface.setSecondsRemaining(seconds)
 
     fun recordCompletedPomodoroDuration() = viewModelScope.launch(Dispatchers.IO) {
-        val pomodoroDurationMinutes = prefUtilInterface.getTimerLength()
+        val pomodoroDurationMinutes = prefUtilInterface.getTimerLength().toLong()
 
-        databaseRepository.addPomodoroDurationBasedOnCategory(0, selectedCategory, getTimerLength() as Long)
+        databaseRepository.addPomodoroDurationBasedOnCategory(0, selectedCategory, pomodoroDurationMinutes)
     }
 
     fun recordPomodoroDuration(duration: Long) = viewModelScope.launch(Dispatchers.IO) {

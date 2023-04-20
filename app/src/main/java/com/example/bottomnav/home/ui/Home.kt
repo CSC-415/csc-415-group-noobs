@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.home.viewmodel.HomeViewModel
+import com.example.bottomnav.util.PrefUtilInterface
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -86,8 +87,6 @@ class Home : Fragment() {
             homeViewModel.recordPomodoroDuration(timerLengthSeconds - secondsRemaining)
             endTimer()
         }
-
-
     }
 
     override fun onResume() {

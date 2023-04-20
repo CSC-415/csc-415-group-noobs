@@ -9,6 +9,7 @@ import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
 import com.example.bottomnav.login.ui.Login
 import com.example.bottomnav.todo.ui.ToDoFragment
+import com.example.bottomnav.util.PrefUtilInterface
 import com.example.myapp.ui.progress.ProgressFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,8 +21,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         replaceFrag(Login())
         binding.bottomNav.isVisible = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+
     }
 
     private fun replaceFrag(fragment : Fragment) {
