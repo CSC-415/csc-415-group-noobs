@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.example.bottomnav.databinding.FragmentHomeBinding
 import com.example.bottomnav.home.viewmodel.HomeViewModel
+import com.example.bottomnav.util.PrefUtilInterface
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.BigInteger
 
 @AndroidEntryPoint
 class Home : Fragment() {
@@ -44,6 +44,38 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.timerSettingsDropDown.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    binding.timerSettingsDropDown.setSelection(position)
+                    homeViewModel.setSelectedTimerLength(
+                        parent?.getItemAtPosition(position).toString()
+                    )
+                    homeViewModel.setPrefUtilSelectedTimerLength(
+                        parent?.getItemAtPosition(position).toString()
+                    )
+                    timer.cancel()
+
+                    if(timerState == TimerState.Running || timerState == TimerState.Paused){
+                        homeViewModel.recordPomodoroDuration(timerLengthSeconds - secondsRemaining)
+                        endTimer()
+                    }
+
+                    initTimer()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    binding.timerSettingsDropDown.setSelection(0)
+                    homeViewModel.setSelectedTimerLength(parent?.getItemAtPosition(0).toString())
+                    homeViewModel.setPrefUtilSelectedTimerLength(
+                        parent?.getItemAtPosition(0).toString()
+                    )
+                    timer.cancel()
+
+                    initTimer()
+                }
+            }
 
         binding.categoriesDropDown.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -88,8 +120,6 @@ class Home : Fragment() {
             homeViewModel.recordPomodoroDuration(timerLengthSeconds - secondsRemaining)
             endTimer()
         }
-
-
     }
 
     override fun onResume() {
@@ -106,13 +136,11 @@ class Home : Fragment() {
 
         if (timerState == TimerState.Running) {
             //backgrounded timer
-            val wakeUpTime = homeViewModel.setBackgroundAlarm(
+            homeViewModel.setBackgroundAlarm(
                 requireContext(),
                 homeViewModel.getNowSeconds(),
                 secondsRemaining
             )
-
-        } else if (timerState == TimerState.Paused) {
 
         }
 

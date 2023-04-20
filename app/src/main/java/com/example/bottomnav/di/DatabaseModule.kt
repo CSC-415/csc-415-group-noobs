@@ -20,7 +20,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             appContext.applicationContext,
             AppDatabase::class.java,
-            "app_todo_database"
+            "app_database"
         ).fallbackToDestructiveMigration().build()
     }
 

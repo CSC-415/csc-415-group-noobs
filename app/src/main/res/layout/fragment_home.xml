@@ -25,14 +25,14 @@
         android:layout_marginBottom="10dp"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/timer_settings_button"
+    <Spinner
+        android:id="@+id/timer_settings_drop_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:entries="@array/timer_lengths"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/timer_setting_margin"
-        android:src="@drawable/baseline_timer_settings_24"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

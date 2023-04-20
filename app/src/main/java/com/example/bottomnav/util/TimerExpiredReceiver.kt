@@ -1,20 +1,20 @@
 package com.example.bottomnav.util
 
 import android.Manifest
-import android.app.PendingIntent
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.example.bottomnav.MainActivity
 import com.example.bottomnav.R
 import com.example.bottomnav.data.repository.DatabaseRepository
 import com.example.bottomnav.home.ui.Home
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,21 +26,23 @@ class TimerExpiredReceiver @Inject constructor(
     private val databaseRepository: DatabaseRepository
 ) : BroadcastReceiver() {
 
-    private val CHANNEL_ID = "timerExpiredChannel"
+    private val CHANNEL_ID = "timerExpiredChannelId"
+    private val CHANNEL_NAME = "timerExpiredChannelName"
     private val NOTIFICATION_ID = 1
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
 
         prefUtilInterface.setTimerState(Home.TimerState.Stopped)
         prefUtilInterface.setAlarmSetTime(0)
 
         val selectedCategory = prefUtilInterface.getSelectedCategory()
-        val duration = prefUtilInterface.getTimerLength() as Long
+        val duration = prefUtilInterface.getTimerLength().toLong()
 
         //update pomodoroDuration in database
         if(selectedCategory != null){
             GlobalScope.launch(Dispatchers.IO) {
-                databaseRepository.addCompletedPomodoroBasedOnCategory(0, selectedCategory, duration)
+                databaseRepository.addPomodoroDurationBasedOnCategory(0, selectedCategory, duration)
             }
         }
 
@@ -51,12 +53,10 @@ class TimerExpiredReceiver @Inject constructor(
             .setContentText("Wow, you're on a roll! Time for a quick break and then back to crushing those Pomodoros like a boss!")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        val intent = Intent(context, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
 
-        builder.setContentIntent(pendingIntent)
-
-        val notificationManager = NotificationManagerCompat.from(context)
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
             == PackageManager.PERMISSION_GRANTED) {
             notificationManager.notify(NOTIFICATION_ID, builder.build())

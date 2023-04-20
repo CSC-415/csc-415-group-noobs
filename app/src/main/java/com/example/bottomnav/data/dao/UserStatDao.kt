@@ -13,6 +13,12 @@ interface UserStatDao {
     @Query("SELECT * FROM userTable")
     suspend fun getAllUserStat(): List<UserStat>
 
+    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username)")
+    suspend fun isUsernameExists(username: String): Boolean
+
+    @Query("SELECT EXISTS (SELECT * FROM userTable WHERE user_name = :username and password = :password)")
+    suspend fun login(username: String, password: String): Boolean
+
     @Insert
     suspend fun insertUserStat(userStat: UserStat)
 
@@ -32,7 +38,7 @@ interface UserStatDao {
                 "total_pomodoro_duration = total_pomodoro_duration + :duration " +
                 "WHERE user_id = :id"
     )
-    suspend fun addCompletedStudyPomodoroDuration(id: Int, duration: Long)
+    suspend fun addStudyPomodoroDuration(id: Int, duration: Long)
 
     @Query(
         "UPDATE userTable " +
@@ -41,7 +47,7 @@ interface UserStatDao {
                 "total_pomodoro_duration = total_pomodoro_duration + :duration " +
                 "WHERE user_id = :id"
     )
-    suspend fun addCompletedWorkPomodoroDuration(id: Int, duration: Long)
+    suspend fun addWorkPomodoroDuration(id: Int, duration: Long)
 
     @Query(
         "UPDATE userTable " +
@@ -50,7 +56,7 @@ interface UserStatDao {
                 "total_pomodoro_duration = total_pomodoro_duration + :duration " +
                 "WHERE user_id = :id"
     )
-    suspend fun addCompletedExercisePomodoroDuration(id: Int, duration: Long)
+    suspend fun addExercisePomodoroDuration(id: Int, duration: Long)
 
     @Query(
         "UPDATE userTable " +
@@ -59,7 +65,7 @@ interface UserStatDao {
                 "total_pomodoro_duration = total_pomodoro_duration + :duration " +
                 "WHERE user_id = :id"
     )
-    suspend fun addCompletedRelaxPomodoroDuration(id: Int, duration: Long)
+    suspend fun addRelaxPomodoroDuration(id: Int, duration: Long)
 
     @Query(
         "UPDATE userTable " +
@@ -68,6 +74,6 @@ interface UserStatDao {
                 "total_pomodoro_duration = total_pomodoro_duration + :duration " +
                 "WHERE user_id = :id"
     )
-    suspend fun addCompletedMiscellaneousPomodoroDuration(id: Int, duration: Long)
+    suspend fun addMiscellaneousPomodoroDuration(id: Int, duration: Long)
 
 }

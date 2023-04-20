@@ -13,8 +13,12 @@ class PrefUtil @Inject constructor(
     private val preferences = appContext.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
 
     override fun getTimerLength(): Int{
-        //placeholder
-        return 1
+        if(getSelectedTimerLength() != null){
+            return getSelectedTimerLength()!!.toInt()
+        }
+        else{
+            return 5
+        }
     }
 
     override fun resetPrefUtil(){
@@ -79,6 +83,17 @@ class PrefUtil @Inject constructor(
         editor.apply()
     }
 
+    override fun getSelectedTimerLength(): String?{
+        return preferences.getString(SELECTED_TIMER_LENGTH_ID, null)
+    }
+
+    override fun setSelectedTimerLength(timLen: String){
+        val editor = preferences.edit()
+
+        editor.putString(SELECTED_TIMER_LENGTH_ID, timLen)
+        editor.apply()
+    }
+
     companion object {
         private const val SHARED_PREFERENCES = "timerPreferences"
 
@@ -87,6 +102,7 @@ class PrefUtil @Inject constructor(
         private const val SECONDS_REMAINING_ID = "seconds_remaining"
         private const val ALARM_SET_TIME_ID = "backgrounded_time"
         private const val SELECTED_CATEGORY_ID = "selected_category"
+        private const val SELECTED_TIMER_LENGTH_ID = "selected_category"
     }
 
 }
