@@ -3,28 +3,36 @@ package com.example.bottomnav.data.repository
 import androidx.lifecycle.LiveData
 import com.example.bottomnav.data.entity.TodoItem
 import com.example.bottomnav.data.entity.UserStat
-
+import com.github.mikephil.charting.data.Entry
+import java.util.*
 interface DatabaseRepositoryInterface {
 
-    fun getAllTodoItems(): LiveData<List<TodoItem>>
+    fun getAllTodoItems():LiveData<List<TodoItem>>
 
-    suspend fun getAllUserStat(): List<UserStat>
+    suspend fun insert(toDosItem: TodoItem){
 
-    suspend fun insert(toDosItem: TodoItem)
+    }
 
-    suspend fun insertUserStat(userStat: UserStat)
+    suspend fun update(toDosItem: TodoItem){
 
-    suspend fun update(toDosItem: TodoItem)
+    }
 
-    suspend fun update(userStat: UserStat)
+    fun delete(toDosItem: TodoItem){
 
-    fun delete(toDosItem: TodoItem)
+    }
 
-    fun delete(userStat: UserStat)
+//    DUMMY DATA FOR GRAPH
+    fun generateRandomData(): List<Entry>
 
+//    TOTAL TASKS / POMODORO FOR PROGRESS PAGE
+    fun getTotalYAxisValues(): Int
     fun clearUsers()
 
     suspend fun addCompletedPomodoroBasedOnCategory(id: Int, category: String, duration: Long)
 
 //    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
+    suspend fun getAllUserStat(): List<UserStat>
+    suspend fun insertUserStat(userStat: UserStat)
+    suspend fun update(userStat: UserStat)
+    fun delete(userStat: UserStat)
 }

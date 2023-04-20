@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import com.example.bottomnav.achievements.ui.AchievementsFragment
 import com.example.bottomnav.databinding.ActivityMainBinding
 import com.example.bottomnav.home.ui.Home
-import com.example.bottomnav.progress.ui.Progress
 import com.example.bottomnav.todo.ui.ToDoFragment
+import com.example.myapp.ui.progress.ProgressFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         replaceFrag(Home())
 
         binding.bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
+            when(it.itemId) {
                 R.id.home -> replaceFrag(Home())
-                R.id.progress -> replaceFrag(Progress())
+                R.id.progress -> replaceFrag(ProgressFragment())
                 R.id.achievements -> replaceFrag(AchievementsFragment())
                 R.id.to_do -> replaceFrag(ToDoFragment())
 
@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFrag(fragment: Fragment) {
-        val fragManager = supportFragmentManager
+    private fun replaceFrag(fragment : Fragment) {
+        val fragManager  = supportFragmentManager
         val fragTransaction = fragManager.beginTransaction()
-        fragTransaction.replace(R.id.frame_layout, fragment)
+        fragTransaction.replace(R.id.frame_layout,fragment)
         fragTransaction.commit()
     }
 }
