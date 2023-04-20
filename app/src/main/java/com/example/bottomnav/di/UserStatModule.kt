@@ -14,20 +14,20 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object UserModule {
+object UserStatModule {
+
 
     @Provides
-    fun provideAppDatabase(@ApplicationContext appContext: Context): UserStatDatabase {
+    fun provideApUserStatDatabase(@ApplicationContext appContext: Context): UserStatDatabase {
         return Room.databaseBuilder(
             appContext.applicationContext,
             UserStatDatabase::class.java,
-            "app_database"
+            "app_user_stat_database"
         ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
     fun providesUserStatDAO(userStatDatabase: UserStatDatabase): UserStatDao {
-        return userStatDatabase.userStatDao()
+        return userStatDatabase.getUserStatDao()
     }
-
 }

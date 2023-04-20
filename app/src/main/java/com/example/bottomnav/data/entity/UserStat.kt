@@ -3,7 +3,8 @@ package com.example.bottomnav.data.entity
 import androidx.room.*
 
 @Entity(tableName = "userTable")
-data class UserStat (
+data class UserStat(
+    @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true)
     val userId: Int,
     @ColumnInfo(name = "user_first_name")
@@ -23,17 +24,17 @@ data class UserStat (
     @ColumnInfo(name = "no_of_todo_items_completed")
     val todoItemsCompleted: Int,
     @ColumnInfo(name = "total_pomodoro_duration")
-    val totalPomodoroDuration: Int,
+    val totalPomodoroDuration: Long,//home everytime the pomodoro ends add here
     @ColumnInfo(name = "total_study_duration")
-    val totalStudyDuration: Int,
+    val totalStudyDuration: Long,
     @ColumnInfo(name = "total_work_duration")
-    val totalWorkDuration: Int,
+    val totalWorkDuration: Long,
     @ColumnInfo(name = "total_exercise_duration")
-    val totalExerciseDuration: Int,
+    val totalExerciseDuration: Long,
     @ColumnInfo(name = "total_relax_duration")
-    val totalRelaxDuration: Int,
-    @ColumnInfo(name = "total_misc_duration")
-    val totalMiscDuration: Int,
+    val totalRelaxDuration: Long,
+    @ColumnInfo(name = "total_miscellaneous_duration")
+    val totalMiscDuration: Long,
     @ColumnInfo(name = "no_of_pomodoro_streaks")
     val noOfPomodoroStreaks: Int,
     @ColumnInfo(name = "no_of_pomodoro_completed")

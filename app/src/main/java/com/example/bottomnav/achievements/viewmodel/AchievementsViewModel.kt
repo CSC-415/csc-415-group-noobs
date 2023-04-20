@@ -34,7 +34,7 @@ class AchievementsViewModel @Inject constructor(
     fun addUser(userStat: UserStat) {
         runBlocking {
             val job = viewModelScope.launch(Dispatchers.IO) {
-                repository.insert(userStat)
+                repository.insertUserStat(userStat)
             }
             job.join()
         }

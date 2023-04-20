@@ -12,7 +12,7 @@ interface DatabaseRepositoryInterface {
 
     suspend fun insert(toDosItem: TodoItem)
 
-    suspend fun insert(userStat: UserStat)
+    suspend fun insertUserStat(userStat: UserStat)
 
     suspend fun update(toDosItem: TodoItem)
 
@@ -24,4 +24,7 @@ interface DatabaseRepositoryInterface {
 
     fun clearUsers()
 
+    suspend fun addCompletedPomodoroBasedOnCategory(id: Int, category: String, duration: Long)
+
+//    suspend fun AddPomodoroDurationBasedOnCategory(id: Int, category: String, duration: Long)
 }

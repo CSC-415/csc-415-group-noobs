@@ -10,10 +10,9 @@ import javax.inject.Inject
 class DatabaseRepository @Inject constructor(
     private val todoItemsDAO: TodoItemsDao,
     private val userStatDAO: UserStatDao
-    ): DatabaseRepositoryInterface {
+) : DatabaseRepositoryInterface {
 
     private val allItemToDos: LiveData<List<TodoItem>> = todoItemsDAO.getAllToDo()
-    //private val allUserStat: List<UserStat> = userStatDAO.getAllUserStat()
 
     override fun getAllTodoItems() = todoItemsDAO.getAllToDo()
 
@@ -21,7 +20,7 @@ class DatabaseRepository @Inject constructor(
 
     override suspend fun insert(toDosItem: TodoItem) = todoItemsDAO.insert(toDosItem)
 
-    override suspend fun insert(userStat: UserStat) = userStatDAO.insert(userStat)
+    override suspend fun insertUserStat(userStat: UserStat) = userStatDAO.insertUserStat(userStat)
 
     override suspend fun update(toDosItem: TodoItem) = todoItemsDAO.update(toDosItem)
 
@@ -33,4 +32,21 @@ class DatabaseRepository @Inject constructor(
 
     override fun clearUsers() = userStatDAO.clear()
 
+    override suspend fun addCompletedPomodoroBasedOnCategory(
+        id: Int,
+        category: String,
+        duration: Long
+    ) {
+        if (category.equals("Study")) {
+            userStatDAO.addCompletedStudyPomodoroDuration(id, duration)
+        } else if (category.equals("Work")) {
+            userStatDAO.addCompletedWorkPomodoroDuration(id, duration)
+        } else if (category.equals("Exercise")) {
+            userStatDAO.addCompletedExercisePomodoroDuration(id, duration)
+        } else if (category.equals("Relaxation")) {
+            userStatDAO.addCompletedRelaxPomodoroDuration(id, duration)
+        } else {
+            userStatDAO.addCompletedMiscellaneousPomodoroDuration(id, duration)
+        }
+    }
 }

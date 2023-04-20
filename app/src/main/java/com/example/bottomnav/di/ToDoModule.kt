@@ -17,11 +17,11 @@ import dagger.hilt.components.SingletonComponent
 object ToDoModule {
 
     @Provides
-    fun provideAppDatabase(@ApplicationContext appContext: Context): TodoItemDatabase {
+    fun provideAppTodoDatabase(@ApplicationContext appContext: Context): TodoItemDatabase {
         return Room.databaseBuilder(
             appContext.applicationContext,
             TodoItemDatabase::class.java,
-            "app_database"
+            "app_todo_database"
         ).fallbackToDestructiveMigration().build()
     }
 
